@@ -38,7 +38,7 @@ class Item(db.Model):
     __tablename__ = 'items'
 
     item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    inventory_id = db.Column(db.Integer, db.ForeignKey('inventories.inventory_id'))
+    inventory_id = db.Column(db.Integer, db.ForeignKey('inventories.inventory_id'), nullable=False)
     name = db.Column(db.String, nullable=False)
     category = db.Column(db.String)
     quantity = db.Column(db.Float, nullable=False)
