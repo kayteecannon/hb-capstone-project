@@ -1,7 +1,7 @@
 """CRUD operations."""
 
 from model import db, User, Inventory, Item, connect_to_db
-
+from datetime import datetime
 
 def create_user(email, password):
     """Create and return a new user."""
@@ -25,6 +25,19 @@ def create_inventory(user_id, title):
     db.session.commit()
 
     return inventory
+
+def create_item(inventory_id, name, quantity, date_added):
+    """Create and return a new item."""
+
+    inventory = Inventory.query.get(inventory_id)
+    item = Item(inventory_id=inventory_id, name=name, quantity=quantity, date_added=date_added)
+
+    inventory.items.append(item)
+
+    db.session.add(item)
+    db.session.commit()
+
+    return item
 
 if __name__ == '__main__':
     from server import app
