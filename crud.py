@@ -82,6 +82,15 @@ def get_inventories_for_user(user):
 
     return inventories
 
+def delete_item(item):
+    """Delete item from database."""
+
+    print(f'Deleting item: {item}')
+    
+    db.session.delete(item)
+    db.session.commit()
+
+    
 
 if __name__ == '__main__':
     from server import app
