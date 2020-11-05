@@ -75,6 +75,13 @@ def get_items_from_inventory(inventory):
 
     return items
 
+def get_inventories_for_user(user):
+    """Return all inventories for given user."""
+
+    inventories = Inventory.query.filter_by(user=user).all()
+
+    return inventories
+
 
 if __name__ == '__main__':
     from server import app
