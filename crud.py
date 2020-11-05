@@ -101,6 +101,14 @@ def update_item_quantity(item, quantity):
 
     print(f'Item quantity updated: name: {item.name}, qty: {quantity}')
 
+def update_item_name(item, name):
+    """Update name of given item."""
+
+    item.name = name
+
+    db.session.commit()
+
+    print(f'Item name updated: item_id: {item.item_id} name: {item.name}')
 
 #
 # Delete functions
