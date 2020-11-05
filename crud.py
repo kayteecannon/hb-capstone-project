@@ -49,6 +49,15 @@ def get_user_by_id(user_id):
 
     return user
 
+def get_inventory_by_id(inventory_id):
+
+    inventory = Inventory.query.get(inventory_id)
+
+    if inventory == None:
+        print(f'No inventory found with id: {inventory_id}')
+
+    return inventory
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app, 'hb-capstone-db')
