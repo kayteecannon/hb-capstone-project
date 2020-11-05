@@ -12,7 +12,7 @@ class User(db.Model):
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
     
-    inventories = db.relationship('Inventory')
+    inventories = db.relationship('Inventory', cascade='all, delete-orphan')
 
     def __repr__(self):
         return f'<User user_id: {self.user_id}, email: {self.email}>'
@@ -27,7 +27,7 @@ class Inventory(db.Model):
     title = db.Column(db.String, nullable=False)
 
     user = db.relationship('User')
-    items = db.relationship('Item')
+    items = db.relationship('Item', cascade='all, delete-orphan')
 
     def __repr__(self):
         return f'<Inventory inventory_id: {self.inventory_id}, title: {self.title}>'
