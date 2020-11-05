@@ -83,7 +83,7 @@ def get_inventories_for_user(user):
     return inventories
 
 def delete_item(item):
-    """Delete item from database."""
+    """Delete given item from database."""
 
     print(f'Deleting item: {item}')
 
@@ -91,11 +91,19 @@ def delete_item(item):
     db.session.commit()
 
 def delete_inventory(inventory):
-    """Delete inventory from database. Cascade deletes all items within inventory."""
+    """Delete given inventory from database. Cascade deletes all items within inventory."""
 
     print(f'Deleting inventory: {inventory}')
 
     db.session.delete(inventory)
+    db.session.commit()
+
+def delete_user(user):
+    """Delete given user from database. Cascade deletes all inventories of user."""
+
+    print(f'Deleting user: {user}')
+
+    db.session.delete(user)
     db.session.commit()
 
 if __name__ == '__main__':
