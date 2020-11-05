@@ -3,6 +3,9 @@
 from model import db, User, Inventory, Item, connect_to_db
 from datetime import datetime
 
+#
+# Create functions
+#
 def create_user(email, password):
     """Create and return a new user."""
 
@@ -39,6 +42,9 @@ def create_item(inventory_id, name, quantity, date_added):
 
     return item
 
+#
+# Read functions
+#
 def get_user_by_id(user_id):
     """Return user given user_id."""
 
@@ -82,6 +88,23 @@ def get_inventories_for_user(user):
 
     return inventories
 
+#
+# Update functions
+#
+
+def update_item_quantity(item, quantity):
+    """Update quantity of given item."""
+
+    item.quantity = quantity
+
+    db.session.commit()
+
+    print(f'Item quantity updated: name: {item.name}, qty: {quantity}')
+
+
+#
+# Delete functions
+#
 def delete_item(item):
     """Delete given item from database."""
 
