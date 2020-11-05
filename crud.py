@@ -39,6 +39,16 @@ def create_item(inventory_id, name, quantity, date_added):
 
     return item
 
+def get_user_by_id(user_id):
+    """Return user given user_id."""
+
+    user = User.query.get(user_id)
+
+    if user == None:
+        print(f'No user found with id: {user_id}')
+
+    return user
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app, 'hb-capstone-db')
