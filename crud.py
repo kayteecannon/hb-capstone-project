@@ -86,11 +86,17 @@ def delete_item(item):
     """Delete item from database."""
 
     print(f'Deleting item: {item}')
-    
+
     db.session.delete(item)
     db.session.commit()
 
-    
+def delete_inventory(inventory):
+    """Delete inventory from database. Cascade deletes all items within inventory."""
+
+    print(f'Deleting inventory: {inventory}')
+
+    db.session.delete(inventory)
+    db.session.commit()
 
 if __name__ == '__main__':
     from server import app
