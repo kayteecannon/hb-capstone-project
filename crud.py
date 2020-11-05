@@ -50,6 +50,7 @@ def get_user_by_id(user_id):
     return user
 
 def get_inventory_by_id(inventory_id):
+    """Return inventory given inventory_id."""
 
     inventory = Inventory.query.get(inventory_id)
 
@@ -57,6 +58,23 @@ def get_inventory_by_id(inventory_id):
         print(f'No inventory found with id: {inventory_id}')
 
     return inventory
+
+def get_item_by_id(item_id):
+    """Return item given item_id."""
+    item = Item.query.get(item_id)
+
+    if item == None:
+        print(f'No item found with id: {item_id}')
+
+    return item
+
+def get_items_from_inventory(inventory):
+    """Return all items in given inventory."""
+
+    items = Item.query.filter_by(inventory=inventory).all()
+
+    return items
+
 
 if __name__ == '__main__':
     from server import app
