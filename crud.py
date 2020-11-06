@@ -88,6 +88,18 @@ def get_inventories_for_user(user):
 
     return inventories
 
+def get_all_items_for_user(user):
+    """Return a list of all items for given user."""
+    
+    all_items = []
+    inventories = get_inventories_for_user(user)
+
+    for inventory in inventories:
+        items = get_items_from_inventory(inventory)
+        all_items += items
+
+    return all_items
+
 #
 # Update functions
 #
