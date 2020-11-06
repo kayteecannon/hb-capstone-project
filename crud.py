@@ -108,7 +108,16 @@ def update_item_name(item, name):
 
     db.session.commit()
 
-    print(f'Item name updated: item_id: {item.item_id} name: {item.name}')
+    print(f'Item name updated: item_id: {item.item_id}, name: {name}')
+
+def update_inventory_title(inventory, title):
+    """Update title of given inventory."""
+
+    inventory.title = title
+
+    db.session.commit()
+
+    print(f'Inventory title updated: inventory_id: {inventory.inventory_id}, title: {title}')
 
 #
 # Delete functions
