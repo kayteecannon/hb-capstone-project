@@ -116,6 +116,7 @@ def update_inventory_title(inventory, title):
     """Update title of given inventory."""
 
     inventory.title = title
+    inventory.last_updated_on = datetime.now()
 
     db.session.commit()
 
