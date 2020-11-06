@@ -11,6 +11,8 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
+    date_added = db.Column(db.DateTime, nullable=False)
+    last_updated_on = db.Column(db.DateTime, nullable=False)
     
     inventories = db.relationship('Inventory', cascade='all, delete-orphan')
 
@@ -25,6 +27,8 @@ class Inventory(db.Model):
     inventory_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     title = db.Column(db.String, nullable=False)
+    date_added = db.Column(db.DateTime, nullable=False)
+    last_updated_on = db.Column(db.DateTime, nullable=False)
 
     user = db.relationship('User')
     items = db.relationship('Item', cascade='all, delete-orphan')
@@ -39,12 +43,13 @@ class Item(db.Model):
 
     item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     inventory_id = db.Column(db.Integer, db.ForeignKey('inventories.inventory_id'), nullable=False)
-    name = db.Column(db.String, nullable=False)
     category = db.Column(db.String)
+    name = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Float, nullable=False)
     units = db.Column(db.String)
-    expiration_date = db.Column(db.DateTime)
+    expiration_date = db.Column(db.Date)
     date_added = db.Column(db.DateTime, nullable=False)
+    last_updated_on =db.Column(db.DateTime, nullable=False)
 
     inventory = db.relationship('Inventory')
 
@@ -68,4 +73,4 @@ if __name__ == '__main__':
     # too annoying; this will tell SQLAlchemy not to print out every
     # query it executes.
 
-    connect_to_db(app, 'hb-capstone-db')
+    connect_to_db(app, 'hbcapstone')
