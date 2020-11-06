@@ -9,7 +9,7 @@ from datetime import datetime
 def create_user(email, password):
     """Create and return a new user."""
 
-    user = User(email=email, password=password)
+    user = User(email=email, password=password, date_added=datetime.now(), last_updated_on=datetime.now())
 
     db.session.add(user)
     db.session.commit()
@@ -148,4 +148,4 @@ def delete_user(user):
 
 if __name__ == '__main__':
     from server import app
-    connect_to_db(app, 'hb-capstone-db')
+    connect_to_db(app, 'hbcapstone')
