@@ -106,6 +106,7 @@ def update_item_name(item, name):
     """Update name of given item."""
 
     item.name = name
+    item.last_updated_on = datetime.now()
 
     db.session.commit()
 
