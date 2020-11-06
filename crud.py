@@ -96,6 +96,7 @@ def update_item_quantity(item, quantity):
     """Update quantity of given item."""
 
     item.quantity = quantity
+    item.last_updated_on = datetime.now()
 
     db.session.commit()
 
