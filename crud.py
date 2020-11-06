@@ -20,7 +20,7 @@ def create_inventory(user_id, title):
     """Create and return a new inventory."""
 
     user = User.query.get(user_id)
-    inventory = Inventory(user_id=user_id, title=title)
+    inventory = Inventory(user_id=user_id, title=title, date_added=datetime.now(), last_updated_on=datetime.now())
     
     user.inventories.append(inventory)
 
