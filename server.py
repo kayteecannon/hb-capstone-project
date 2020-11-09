@@ -23,7 +23,12 @@ def registration():
 
     return render_template('registration.html')
 
+@app.route('/login')
+def login():
+    """View log in page."""
 
+    return render_template('login.html')
+    
 if __name__ == '__main__':
     connect_to_db(app, 'hbcapstone')
     app.run(host='0.0.0.0', debug=True)
