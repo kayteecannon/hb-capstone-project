@@ -55,6 +55,13 @@ def get_user_by_id(user_id):
 
     return user
 
+def get_user_by_email(email):
+    """Return user give email."""
+
+    user = User.query.filter_by(email=email).one()
+    
+    return user
+
 def get_inventory_by_id(inventory_id):
     """Return inventory given inventory_id."""
 
@@ -90,7 +97,7 @@ def get_inventories_for_user(user):
 
 def get_all_items_for_user(user):
     """Return a list of all items for given user."""
-    
+
     all_items = []
     inventories = get_inventories_for_user(user)
 
