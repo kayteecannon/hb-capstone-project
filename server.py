@@ -41,6 +41,12 @@ def expiration_report():
 
     return render_template('expiration-report.html')
 
+@app.route('/user/inventory/item-editor')
+def item_editor():
+    """View item editor."""
+
+    return render_template('item-editor.html')
+
 if __name__ == '__main__':
     connect_to_db(app, 'hbcapstone')
     app.run(host='0.0.0.0', debug=True)
