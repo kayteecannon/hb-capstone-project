@@ -35,6 +35,12 @@ def user_inventory():
 
     return render_template('user-inventory.html')
 
+@app.route('/user/expiration-report')
+def expiration_report():
+    """View user expiration report."""
+
+    return render_template('expiration-report.html')
+
 if __name__ == '__main__':
     connect_to_db(app, 'hbcapstone')
     app.run(host='0.0.0.0', debug=True)
