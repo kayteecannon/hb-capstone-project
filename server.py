@@ -17,6 +17,12 @@ def homepage():
 
     return render_template('homepage.html')
 
+@app.route('/registration')
+def registration():
+    """View registration page."""
+
+    return render_template('registration.html')
+
 
 if __name__ == '__main__':
     connect_to_db(app, 'hbcapstone')
