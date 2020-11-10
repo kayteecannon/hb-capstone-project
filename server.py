@@ -38,11 +38,18 @@ def user_inventory(user_id):
 
     return render_template('user-inventory.html', user=user, inventory=inventory)
 
-@app.route('/user/expiration-report')
-def expiration_report():
+@app.route('/user/<user_id>/expiration-report')
+def expiration_report(user_id):
     """View user expiration report."""
 
-    return render_template('expiration-report.html')
+    user = crud.get_user_by_id(user_id)
+    inventory = crud.get_first_inventory_for_user(user)
+
+    expiring_items = crud.get_items_expiring(inventory, 30)
+
+    return render_template('expiration-report.html', 
+                            user=user, 
+                            expiring_items=expiring_items)
 
 @app.route('/user/inventory/item-editor')
 def item_editor():

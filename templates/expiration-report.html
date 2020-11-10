@@ -2,6 +2,25 @@
 {% block title %}Expiration Report{% endblock %}
 
 {% block body %}
-  <h1>Expiration Report</h1>
+  <h1>User {{ user.user_id }}'s Items Expiring in 30 Days</h1>
+
+  <section class="col-10 mx-auto d-lg-block d-md-block d-none">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Expiration Date</th>
+            <th>Date Added</th>
+        </tr>
+      </thead>
+      {% for item in expiring_items %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.expiration_date }}</td>
+        <td>{{ item.date_added.strftime('%Y-%m-%d') }}</td>
+      </tr>
+      {% endfor %}
 
 {% endblock %}
