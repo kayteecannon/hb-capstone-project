@@ -95,6 +95,13 @@ def get_inventories_for_user(user):
 
     return inventories
 
+def get_first_inventory_for_user(user):
+    """Return first inventory for given user."""
+
+    inventory = Inventory.query.filter_by(user=user).first()
+
+    return inventory
+
 def get_all_items_for_user(user):
     """Return a list of all items for given user."""
 
