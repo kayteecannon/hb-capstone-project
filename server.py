@@ -16,7 +16,7 @@ def homepage():
     """View homepage."""
 
     return render_template('homepage.html')
-
+    
 @app.route('/registration')
 def registration():
     """View registration page."""
@@ -29,11 +29,14 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/user/inventory')
-def user_inventory():
+@app.route('/user/<user_id>/inventory')
+def user_inventory(user_id):
     """View user inventory."""
 
-    return render_template('user-inventory.html')
+    user = crud.get_user_by_id(user_id)
+    inventory = crud.get_first_inventory_for_user(user)
+
+    return render_template('user-inventory.html', user=user, inventory=inventory)
 
 @app.route('/user/expiration-report')
 def expiration_report():
