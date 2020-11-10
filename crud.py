@@ -1,7 +1,7 @@
 """CRUD operations."""
 
 from model import db, User, Inventory, Item, connect_to_db
-from datetime import datetime
+import datetime
 
 #
 # Create functions
@@ -113,6 +113,19 @@ def get_all_items_for_user(user):
         all_items += items
 
     return all_items
+
+def get_items_expiring(inventory, amount_of_days):
+    """Returns a list of items expiring within given amount of months."""
+
+    expiring_items = []
+    timedelta = datetime.timedelta(days=amount_of_days)
+
+    for item in inventory.items:
+        if item.expiration_date - datetime.date.today() <= timedelta:
+            expiring_items.append(item)
+        
+    return expiring_items
+    
 
 #
 # Update functions
