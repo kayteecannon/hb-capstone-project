@@ -33,7 +33,7 @@ def create_item(inventory_id, name, quantity):
     """Create and return a new item."""
 
     inventory = Inventory.query.get(inventory_id)
-    item = Item(inventory_id=inventory_id, name=name, quantity=quantity, date_added=datetime.now(), last_updated_on=datetime.now())
+    item = Item(inventory_id=inventory_id, name=name, quantity=quantity, date_added=datetime.datetime.now(), last_updated_on=datetime.datetime.now())
 
     inventory.items.append(item)
 
@@ -42,6 +42,11 @@ def create_item(inventory_id, name, quantity):
 
     return item
 
+def set_expiration_date(item, expiration_date):
+
+    item.expiration_date = expiration_date
+
+    db.session.commit()
 #
 # Read functions
 #
