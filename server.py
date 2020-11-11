@@ -4,6 +4,7 @@ from flask import (Flask, render_template, request, flash, session, redirect)
 from model import connect_to_db
 import crud
 import os
+from flask_debugtoolbar import DebugToolbarExtension
 
 from jinja2 import StrictUndefined
 
@@ -26,10 +27,27 @@ def registration():
     return render_template('registration.html')
 
 @app.route('/login')
-def login():
+def show_login():
     """View log in page."""
-
     return render_template('login.html')
+
+@app.route('/login', methods=['POST'])
+def login():
+    """Verify login credentials."""
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.get_user_by_email(email)
+    
+    if user and user.password == password:
+        flash('Log in successful!')
+        return redirect(f'/user/{user.user_id}/inventory')
+    else:
+        flash('Log in unsuccessful. Please try again.')
+        
+    return render_template('login.html')
+        
 
 @app.route('/user/<user_id>/inventory')
 def user_inventory(user_id):
@@ -60,5 +78,7 @@ def item_editor():
     return render_template('item-editor.html')
 
 if __name__ == '__main__':
+    app.debug = False
+    DebugToolbarExtension(app)
     connect_to_db(app, 'hbcapstone')
     app.run(host='0.0.0.0', debug=True)
