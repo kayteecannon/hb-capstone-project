@@ -2,6 +2,24 @@
 {% block title %}Item Editor{% endblock %}
 
 {% block body %}
-  <h1>Add/Edit Item</h1>
+  <h1>Add Item</h1>
+
+  <form action="/user/1/inventory/add-item" method="POST">
+    <p>
+      Name <input type="text" name="name">
+    </p>
+
+    <p>
+      Quantity <input type="text" name="quantity">
+    </p>
+
+    <p>
+      Expiration Date <input type="text" name="expiration-date">
+    </p>
+
+    <p>
+      <input type="submit">
+    </p>
+  </form>
 
 {% endblock %}

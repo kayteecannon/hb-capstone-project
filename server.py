@@ -71,11 +71,28 @@ def expiration_report(user_id):
                             user=user, 
                             expiring_items=expiring_items)
 
-@app.route('/user/inventory/item-editor')
-def item_editor():
+@app.route('/user/<user_id>/inventory/item-editor')
+def item_editor(user_id):
     """View item editor."""
 
     return render_template('item-editor.html')
+
+@app.route('/user/<user_id>/inventory/add-item', methods=['POST'])
+def add_item(user_id):
+
+    user = crud.get_user_by_id(user_id)
+    inventory = crud.get_first_inventory_for_user(user)
+    
+    name = request.form.get('name')
+    quantity = request.form.get('quantity')
+    expiration_date = request.form.get('expiration-date')
+
+    item = crud.create_item(inventory.inventory_id, name, quantity)
+    crud.set_expiration_date(item, expiration_date)
+
+    return redirect(f'/user/{user_id}/inventory')
+
+
 
 if __name__ == '__main__':
     app.debug = False
