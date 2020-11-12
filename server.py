@@ -31,7 +31,7 @@ def show_login():
     """View log in page."""
     return render_template('login.html')
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET','POST'])
 def login():
     """Verify login credentials."""
 
@@ -88,7 +88,9 @@ def add_item(user_id):
     expiration_date = request.form.get('expiration-date')
 
     item = crud.create_item(inventory.inventory_id, name, quantity)
-    crud.set_expiration_date(item, expiration_date)
+
+    if expiration_date:
+        crud.set_expiration_date(item, expiration_date)
 
     return redirect(f'/user/{user_id}/inventory')
 
