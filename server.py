@@ -20,9 +20,27 @@ def homepage():
 
     return render_template('homepage.html')
     
-@app.route('/registration')
+@app.route('/register', methods=['GET','POST'])
 def registration():
     """View registration page."""
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm-password')
+
+        print(f'password: {password}, confirm password: {confirm_password}')
+
+        user = crud.get_user_by_email(email)
+
+        if user:
+            flash(f'Cannot create account with email: {email}.')
+        elif password == confirm_password:
+            crud.create_user(email, password)
+            flash('Account created successfully.  Please log in.')
+            return redirect('/login')
+        else:
+            flash(f'Passwords do not match. Please try again.')
+            return redirect('/register')
 
     return render_template('registration.html')
 

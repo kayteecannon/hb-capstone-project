@@ -4,4 +4,17 @@
 {% block body %}
   <h1>Create an account</h1>
 
+  <form action="/register" method="POST">
+    <label for="email">Email</label>
+    <input type="email" name="email" required>
+    <br>
+    <label for="password">Password</label>
+    <input type="password" name="password" required>
+    <br>
+    <label for="confirm-password">Confirm Password</label>
+    <input type="password" name="confirm-password" required>
+    <br>
+    <input type="submit">
+  </form>
+
 {% endblock %}
