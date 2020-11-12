@@ -9,7 +9,7 @@ import datetime
 def create_user(email, password):
     """Create and return a new user."""
 
-    user = User(email=email, password=password, date_added=datetime.now(), last_updated_on=datetime.now())
+    user = User(email=email, password=password, date_added=datetime.datetime.now(), last_updated_on=datetime.datetime.now())
 
     db.session.add(user)
     db.session.commit()
@@ -20,7 +20,7 @@ def create_inventory(user_id, title):
     """Create and return a new inventory."""
 
     user = User.query.get(user_id)
-    inventory = Inventory(user_id=user_id, title=title, date_added=datetime.now(), last_updated_on=datetime.now())
+    inventory = Inventory(user_id=user_id, title=title, date_added=datetime.datetime.now(), last_updated_on=datetime.datetime.now())
     
     user.inventories.append(inventory)
 
@@ -63,7 +63,7 @@ def get_user_by_id(user_id):
 def get_user_by_email(email):
     """Return user give email."""
 
-    user = User.query.filter_by(email=email).one()
+    user = User.query.filter_by(email=email).first()
     
     return user
 
