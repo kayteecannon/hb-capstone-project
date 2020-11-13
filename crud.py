@@ -140,7 +140,7 @@ def update_item_quantity(item, quantity):
     """Update quantity of given item."""
 
     item.quantity = quantity
-    item.last_updated_on = datetime.now()
+    item.last_updated_on = datetime.datetime.now()
 
     db.session.commit()
 
@@ -150,7 +150,7 @@ def update_item_name(item, name):
     """Update name of given item."""
 
     item.name = name
-    item.last_updated_on = datetime.now()
+    item.last_updated_on = datetime.datetime.now()
 
     db.session.commit()
 
@@ -160,7 +160,7 @@ def update_inventory_title(inventory, title):
     """Update title of given inventory."""
 
     inventory.title = title
-    inventory.last_updated_on = datetime.now()
+    inventory.last_updated_on = datetime.datetime.now()
 
     db.session.commit()
 
