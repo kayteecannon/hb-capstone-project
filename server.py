@@ -123,6 +123,26 @@ def edit_item():
 
     return render_template('item-editor.html', item=item)
 
+@app.route('/user/<user_id>/inventory/<item_id>/save-item', methods=['POST'])
+def save_item(user_id, item_id):
+
+    user = crud.get_user_by_id(user_id)
+    item = crud.get_item_by_id(item_id)
+        
+    name = request.form.get('name')
+    quantity = request.form.get('quantity')
+    expiration_date = request.form.get('expiration-date')
+
+    if name != item.name:
+        crud.update_item_name(item, name)
+    
+    if quantity != item.quantity:
+        crud.update_item_quantity(item, quantity)
+
+    if expiration_date != item.expiration_date:
+        crud.set_expiration_date(item, expiration_date)
+
+    return redirect(f'/user/{user_id}/inventory')
 
 if __name__ == '__main__':
     app.debug = False

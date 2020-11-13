@@ -4,7 +4,7 @@
 {% block body %}
   
   <h1>Edit Item</h1>
-  <form action="/user/1/inventory/save-item" method="POST">
+  <form action="/user/1/inventory/{{item.item_id}}/save-item" method="POST">
     <label for="name">Name</label>
     <input type="text" name="name" value={{item.name}} required>
     <br>
