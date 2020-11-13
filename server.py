@@ -95,23 +95,33 @@ def item_editor(user_id):
 
     return render_template('item-editor.html')
 
-@app.route('/user/<user_id>/inventory/add-item', methods=['POST'])
+
+@app.route('/user/<user_id>/inventory/add-item', methods=['GET','POST'])
 def add_item(user_id):
 
-    user = crud.get_user_by_id(user_id)
-    inventory = crud.get_first_inventory_for_user(user)
+    if request.method == 'POST':
+        user = crud.get_user_by_id(user_id)
+        inventory = crud.get_first_inventory_for_user(user)
+        
+        name = request.form.get('name')
+        quantity = request.form.get('quantity')
+        expiration_date = request.form.get('expiration-date')
+
+        item = crud.create_item(inventory.inventory_id, name, quantity)
+
+        if expiration_date:
+            crud.set_expiration_date(item, expiration_date)
+
+        return redirect(f'/user/{user_id}/inventory')
     
-    name = request.form.get('name')
-    quantity = request.form.get('quantity')
-    expiration_date = request.form.get('expiration-date')
+    return render_template('add-item.html')
 
-    item = crud.create_item(inventory.inventory_id, name, quantity)
+@app.route('/user/1/inventory/item-editor/1')
+def edit_item():
 
-    if expiration_date:
-        crud.set_expiration_date(item, expiration_date)
+    item = crud.get_item_by_id(1)
 
-    return redirect(f'/user/{user_id}/inventory')
-
+    return render_template('item-editor.html', item=item)
 
 
 if __name__ == '__main__':

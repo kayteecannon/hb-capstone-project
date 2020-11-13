@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Item Editor{% endblock %}
+
+{% block body %}
+
+  <h1>Add Item</h1>
+  <form action="/user/1/inventory/add-item" method="POST">
+    <label for="name">Name</label>
+    <input type="text" name="name" required>
+    <br>
+    <label for="quantity">Quantity</label>
+    <input type="text" name="quantity" required>
+    <br>
+    <label for="expiration-date">Expiration Date</label>
+    <input type="text" name="expiration-date">
+    <br>
+    <input type="submit">
+  </form>
+
+{% endblock %}
