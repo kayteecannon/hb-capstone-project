@@ -14,7 +14,7 @@
         </tr>
       </thead>
       {% for item in inventory.items %}
-      <tr>
+      <tr id="item-{{item.item_id}}-row">
         <td>{{ item.name }}</td>
         <td>{{ item.quantity }}</td>
         <td>{{ item.date_added.strftime('%Y-%m-%d') }}</td>
@@ -25,7 +25,7 @@
 
       <a href="/user/1/inventory/add-item">Add Item</a>
       <a href="/user/1/inventory/item-editor/1">Edit Item</a>
-
-
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="/static/js/ItemController.js"></script>
 {% endblock %}
 
