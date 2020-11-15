@@ -87,14 +87,18 @@ def user_inventory(user_id):
 def expiration_report(user_id):
     """View user expiration report."""
 
-    user = crud.get_user_by_id(user_id)
-    inventory = crud.get_first_inventory_for_user(user)
+    if session.get('logged_in') == True and int(user_id) == session.get('current_user'):
+        user = crud.get_user_by_id(user_id)
+        inventory = crud.get_first_inventory_for_user(user)
 
-    expiring_items = crud.get_items_expiring(inventory, 30)
+        expiring_items = crud.get_items_expiring(inventory, 30)
 
-    return render_template('expiration-report.html', 
-                            user=user, 
-                            expiring_items=expiring_items)
+        return render_template('expiration-report.html', 
+                                user=user, 
+                                expiring_items=expiring_items)
+    
+    else:
+        return redirect('/')
 
 @app.route('/user/<user_id>/inventory/item-editor')
 def item_editor(user_id):
