@@ -126,8 +126,9 @@ def get_items_expiring(inventory, amount_of_days):
     timedelta = datetime.timedelta(days=amount_of_days)
 
     for item in inventory.items:
-        if item.expiration_date - datetime.date.today() <= timedelta:
-            expiring_items.append(item)
+        if item.expiration_date != None:
+            if item.expiration_date - datetime.date.today() <= timedelta:
+                expiring_items.append(item)
         
     return expiring_items
     
