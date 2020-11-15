@@ -69,7 +69,16 @@ def login():
         flash('Log in unsuccessful. Please try again.')
         
     return render_template('login.html')
-        
+
+# FIXME : Uses GET method to logout; should replace with Flask-Login library       
+@app.route('/logout')
+def logout():
+    """Log out current user."""
+
+    session["current_user"] = None
+    session["logged_in"] = False
+
+    return redirect('/')
 
 @app.route('/user/<user_id>/inventory')
 def user_inventory(user_id):
