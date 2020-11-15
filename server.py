@@ -145,12 +145,16 @@ def add_item(user_id):
     else:
         return redirect('/')
 
-@app.route('/user/<user_id>/inventory/item-editor/1')
-def edit_item(user_id):
+@app.route('/user/<user_id>/inventory/item-editor/<item_id>')
+def edit_item(user_id, item_id):
     if session.get('logged_in') == True and int(user_id) == session.get('current_user'):
-        item = crud.get_item_by_id(1)
+        
+        item = crud.get_item_by_id(item_id)
 
-        return render_template('item-editor.html', item=item)
+        if item:
+            return render_template('item-editor.html', item=item)
+        else: 
+            return redirect(f'/user/{user_id}/inventory')
 
     else:
         return redirect('/')
