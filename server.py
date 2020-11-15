@@ -47,6 +47,7 @@ def registration():
 @app.route('/login')
 def show_login():
     """View log in page."""
+    
     return render_template('login.html')
 
 @app.route('/login', methods=['GET','POST'])
@@ -104,56 +105,71 @@ def expiration_report(user_id):
 def item_editor(user_id):
     """View item editor."""
 
-    return render_template('item-editor.html')
+    if session.get('logged_in') == True and int(user_id) == session.get('current_user'):
+        return render_template('item-editor.html')
+    
+    else:
+        return redirect('/')
 
 
 @app.route('/user/<user_id>/inventory/add-item', methods=['GET','POST'])
 def add_item(user_id):
 
-    if request.method == 'POST':
-        user = crud.get_user_by_id(user_id)
-        inventory = crud.get_first_inventory_for_user(user)
+    if session.get('logged_in') == True and int(user_id) == session.get('current_user'):
+        if request.method == 'POST':
+            user = crud.get_user_by_id(user_id)
+            inventory = crud.get_first_inventory_for_user(user)
+            
+            name = request.form.get('name')
+            quantity = request.form.get('quantity')
+            expiration_date = request.form.get('expiration-date')
+
+            item = crud.create_item(inventory.inventory_id, name, quantity)
+
+            if expiration_date:
+                crud.set_expiration_date(item, expiration_date)
+
+            return redirect(f'/user/{user_id}/inventory')
         
-        name = request.form.get('name')
-        quantity = request.form.get('quantity')
-        expiration_date = request.form.get('expiration-date')
-
-        item = crud.create_item(inventory.inventory_id, name, quantity)
-
-        if expiration_date:
-            crud.set_expiration_date(item, expiration_date)
-
-        return redirect(f'/user/{user_id}/inventory')
+        return render_template('add-item.html')
     
-    return render_template('add-item.html')
+    else:
+        return redirect('/')
 
-@app.route('/user/1/inventory/item-editor/1')
-def edit_item():
+@app.route('/user/<user_id>/inventory/item-editor/1')
+def edit_item(user_id):
+    if session.get('logged_in') == True and int(user_id) == session.get('current_user'):
+        item = crud.get_item_by_id(1)
 
-    item = crud.get_item_by_id(1)
+        return render_template('item-editor.html', item=item)
 
-    return render_template('item-editor.html', item=item)
+    else:
+        return redirect('/')
 
 @app.route('/user/<user_id>/inventory/<item_id>/save-item', methods=['POST'])
 def save_item(user_id, item_id):
 
-    user = crud.get_user_by_id(user_id)
-    item = crud.get_item_by_id(item_id)
+    if session.get('logged_in') == True and int(user_id) == session.get('current_user'):
+        user = crud.get_user_by_id(user_id)
+        item = crud.get_item_by_id(item_id)
+            
+        name = request.form.get('name')
+        quantity = request.form.get('quantity')
+        expiration_date = request.form.get('expiration-date')
+
+        if name != item.name:
+            crud.update_item_name(item, name)
         
-    name = request.form.get('name')
-    quantity = request.form.get('quantity')
-    expiration_date = request.form.get('expiration-date')
+        if quantity != item.quantity:
+            crud.update_item_quantity(item, quantity)
 
-    if name != item.name:
-        crud.update_item_name(item, name)
+        if expiration_date != item.expiration_date:
+            crud.set_expiration_date(item, expiration_date)
+
+        return redirect(f'/user/{user_id}/inventory')
     
-    if quantity != item.quantity:
-        crud.update_item_quantity(item, quantity)
-
-    if expiration_date != item.expiration_date:
-        crud.set_expiration_date(item, expiration_date)
-
-    return redirect(f'/user/{user_id}/inventory')
+    else:
+        return redirect('/')
 
 if __name__ == '__main__':
     app.debug = False
