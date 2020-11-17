@@ -148,15 +148,19 @@ def add_item(user_id):
 @app.route('/get-item-ids')
 def get_item_ids():
 
-    itemDict = {}
-    user = crud.get_user_by_id(1)
+    user_item_dict = {}
+    item_dict = {}
+    user = crud.get_user_by_id(session['current_user'])
     inventory = crud.get_first_inventory_for_user(user)
     for item in inventory.items:
-        itemDict[item.name] = item.item_id
+        item_dict[item.name] = item.item_id
     
-    print(f'{itemDict}')
+    user_item_dict['user_id'] = user.user_id
+    user_item_dict['items'] = item_dict
 
-    return jsonify(itemDict)
+    print(f'{user_item_dict}')
+
+    return jsonify(user_item_dict)
 
 @app.route('/user/<user_id>/inventory/item-editor/<item_id>')
 def edit_item(user_id, item_id):
