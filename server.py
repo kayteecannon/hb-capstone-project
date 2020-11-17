@@ -1,6 +1,6 @@
 """Server for HB Capstone app."""
 
-from flask import (Flask, render_template, request, flash, session, redirect)
+from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 from model import connect_to_db
 import crud
 import os
@@ -144,6 +144,19 @@ def add_item(user_id):
     
     else:
         return redirect('/')
+
+@app.route('/get-item-ids')
+def get_item_ids():
+
+    itemDict = {}
+    user = crud.get_user_by_id(1)
+    inventory = crud.get_first_inventory_for_user(user)
+    for item in inventory.items:
+        itemDict[item.name] = item.item_id
+    
+    print(f'{itemDict}')
+
+    return jsonify(itemDict)
 
 @app.route('/user/<user_id>/inventory/item-editor/<item_id>')
 def edit_item(user_id, item_id):
