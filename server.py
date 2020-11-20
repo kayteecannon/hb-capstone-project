@@ -206,7 +206,7 @@ def save_item(user_id, item_id):
 @app.route('/send-email')
 def send_email():
     
-    user = crud.get_user_by_id(1)
+    user = crud.get_user_by_id(session['current_user'])
     inventory = crud.get_first_inventory_for_user(user)
 
     expiring_items = crud.get_items_expiring(inventory, 30)
