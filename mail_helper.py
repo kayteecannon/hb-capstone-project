@@ -6,26 +6,12 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 import crud
 
-def send_email():
+def send_email(htmlString):
   message = Mail(
       from_email='kaytee.cannon@mac.com',
       to_emails='kayteecannon@gmail.com',
       subject='Sending with Twilio SendGrid is Fun',
-      html_content='''<table class="table table-hover table-striped">
-        <thead>
-          <tr>
-              <th>Name</th>
-              <th>Quantity</th>
-              <th>Expiration Date</th>
-              <th>Date Added</th>
-          </tr>
-        </thead>
-        <tr>
-          <td>email</td>
-          <td>sent</td>
-          <td>through</td>
-          <td>server.py</td>
-        </tr>''')
+      html_content=htmlString)
 
   try:
       sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))

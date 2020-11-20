@@ -205,8 +205,24 @@ def save_item(user_id, item_id):
 
 @app.route('/send-email')
 def send_email():
+    
+    user = crud.get_user_by_id(1)
+    items_list = crud.get_all_items_for_user(user)
 
-    mail_helper.send_email()
+    html_list = []
+
+    for item in items_list:
+        html_list.append(f'''<tr>
+                                <td>{item.name}</td>
+                                <td>{item.quantity}</td>
+                                <td>{item.expiration_date}</td>
+                                <td>{item.date_added.strftime('%Y-%m-%d')}</td>
+                            </tr>''')
+    
+    separator = ''
+    htmlString = separator.join(html_list)
+
+    mail_helper.send_email(htmlString)
 
     return 'Email test'
 
