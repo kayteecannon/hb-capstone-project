@@ -8,6 +8,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from jinja2 import StrictUndefined
 
+import mail_helper
+
 app = Flask(__name__)
 
 SECRET_KEY = os.environ['SECRET_KEY']
@@ -200,6 +202,13 @@ def save_item(user_id, item_id):
     
     else:
         return redirect('/')
+
+@app.route('/send-email')
+def send_email():
+
+    mail_helper.send_email()
+
+    return 'Email test'
 
 if __name__ == '__main__':
     app.debug = False
