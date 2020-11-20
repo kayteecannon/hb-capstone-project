@@ -207,11 +207,13 @@ def save_item(user_id, item_id):
 def send_email():
     
     user = crud.get_user_by_id(1)
-    items_list = crud.get_all_items_for_user(user)
+    inventory = crud.get_first_inventory_for_user(user)
+
+    expiring_items = crud.get_items_expiring(inventory, 30)
 
     html_list = []
 
-    for item in items_list:
+    for item in expiring_items:
         html_list.append(f'''<tr>
                                 <td>{item.name}</td>
                                 <td>{item.quantity}</td>
