@@ -86,6 +86,13 @@ def get_item_by_id(item_id):
 
     return item
 
+def get_item_by_info(name, quantity, expiration_date=None):
+    """Get item by name, quantity, and optional expiration date"""
+
+    item = Item.query.filter_by(name=name, quantity=quantity, expiration_date=expiration_date).one_or_none()
+
+    return item
+
 def get_items_from_inventory(inventory):
     """Return all items in given inventory."""
 

@@ -6,13 +6,13 @@
   <h1>Edit Item</h1>
   <form action="/user/1/inventory/{{item.item_id}}/save-item" method="POST">
     <label for="name">Name</label>
-    <input type="text" name="name" value={{item.name}} required>
+    <input id="item-name" type="text" name="name" value={{item.name}} required>
     <br>
     <label for="quantity">Quantity</label>
-    <input type="text" name="quantity" value={{item.quantity}} required>
+    <input id="item-quantity" type="text" name="quantity" value={{item.quantity}} required>
     <br>
     <label for="expiration-date">Expiration Date</label>
-    <input type="text" name="expiration-date" value={{item.expiration_date}}>
+    <input id="item-expiration" type="text" name="expiration-date" value={{item.expiration_date}}>
     <br>
     <input id="delete-item" type="button" value="Delete" >
     <input type="submit" value="Save">

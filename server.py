@@ -35,10 +35,10 @@ def scheduled_email():
 
     print('Email sent.')
 
-scheduler = BackgroundScheduler()
-scheduler.print_jobs()
-job = scheduler.add_job(scheduled_email, 'interval', minutes=1, max_instances=1, id='my_job_id', replace_existing=True)
-scheduler.start()
+# scheduler = BackgroundScheduler()
+# scheduler.print_jobs()
+# job = scheduler.add_job(scheduled_email, 'interval', minutes=1, max_instances=1, id='my_job_id', replace_existing=True)
+# scheduler.start()
 
 app = Flask(__name__)
 
@@ -233,6 +233,23 @@ def save_item(user_id, item_id):
     
     else:
         return redirect('/')
+
+@app.route('/delete-item', methods=['POST'])
+def delete_item():
+
+    print(request)
+    content = request.get_json()
+    print(content)
+    name = content['name']
+    quantity = content['quantity']
+    expiration = content['expiration']
+
+    item = crud.get_item_by_info(name=name, quantity=quantity, expiration_date=expiration)
+
+    crud.delete_item(item)
+
+    return jsonify('ITEM DELETED!')
+
 # FIXME: Check for current_user in session before setting user to current_user in session
 @app.route('/send-email')
 def send_email():
