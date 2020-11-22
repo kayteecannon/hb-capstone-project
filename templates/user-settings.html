@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Settings{% endblock %}
+
+{% block body %}
+  <h1>Settings</h1>
+  <form action="/set-new-password" method="POST">
+    <label for="email">Email</label>
+    <input type="email" name="email" value={{user.email}} disabled>
+    <br>
+    <p>Change password</p>
+    <label for="password">Current password</label>
+    <input type="password" name="password" required>
+    <br>
+    <label for="new-password">New password</label>
+    <input type="password" name="password" required>
+    <br>
+    <label for="confirm-new-password">Confirm new password</label>
+    <input type="password" name="password" required>
+    <br>
+    <input type="submit">
+  </form>
+
+{% endblock %}

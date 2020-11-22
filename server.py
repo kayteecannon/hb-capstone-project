@@ -276,6 +276,13 @@ def send_email():
 
     return 'Email test'
 
+@app.route('/user/<user_id>/settings')
+def settings(user_id):
+    """View user settings page"""
+
+    user = crud.get_user_by_id(user_id)
+    return render_template('user-settings.html', user=user)
+
 if __name__ == '__main__':
     app.debug = False
     DebugToolbarExtension(app)
