@@ -11,31 +11,7 @@ from jinja2 import StrictUndefined
 import mail_helper
 from apscheduler.schedulers.background import BackgroundScheduler
 
-def scheduled_email():
-    
-    user = crud.get_user_by_id(1)
-    inventory = crud.get_first_inventory_for_user(user)
-
-    expiring_items = crud.get_items_expiring(inventory, 30)
-
-    html_list = []
-
-    for item in expiring_items:
-        html_list.append(f'''<tr>
-                                <td>{item.name}</td>
-                                <td>{item.quantity}</td>
-                                <td>{item.expiration_date}</td>
-                                <td>{item.date_added.strftime('%Y-%m-%d')}</td>
-                            </tr>''')
-    
-    separator = ''
-    htmlString = separator.join(html_list)
-
-    mail_helper.send_email(htmlString)
-
-    print('Email sent.')
-
-# scheduler = BackgroundScheduler()
+scheduler = BackgroundScheduler()
 # scheduler.print_jobs()
 # job = scheduler.add_job(scheduled_email, 'interval', minutes=1, max_instances=1, id='my_job_id', replace_existing=True)
 # scheduler.start()
@@ -282,6 +258,41 @@ def settings(user_id):
 
     user = crud.get_user_by_id(user_id)
     return render_template('user-settings.html', user=user)
+
+def send_scheduled_email(current_user):
+    
+    user = crud.get_user_by_id(current_user)
+    inventory = crud.get_first_inventory_for_user(user)
+
+    expiring_items = crud.get_items_expiring(inventory, 30)
+
+    html_list = []
+
+    for item in expiring_items:
+        html_list.append(f'''<tr>
+                                <td>{item.name}</td>
+                                <td>{item.quantity}</td>
+                                <td>{item.expiration_date}</td>
+                                <td>{item.date_added.strftime('%Y-%m-%d')}</td>
+                            </tr>''')
+    
+    separator = ''
+    htmlString = separator.join(html_list)
+
+    mail_helper.send_email(htmlString)
+
+    print('Email sent.')
+
+@app.route('/schedule-report')
+def schedule_report():
+    """Schedules an automated email report for expiring items."""
+    scheduler.print_jobs()
+    print(session['current_user'])
+    current_user = session['current_user']
+    job = scheduler.add_job(send_scheduled_email, 'interval', minutes=1, max_instances=1, id='my_job_id', replace_existing=True, kwargs= {'current_user': current_user})
+    scheduler.start()
+
+    return "Expiration report email scheduled!"
 
 if __name__ == '__main__':
     app.debug = False
