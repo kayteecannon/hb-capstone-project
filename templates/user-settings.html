@@ -19,5 +19,29 @@
     <br>
     <input type="submit">
   </form>
+<br>
+  <form action="/schedule-report" method="POST">
+    <label for="email-frequency">Select email frequency</label>
+        <br>    
+      <select name="email-frequency" id="email-frequency">
+        <option value="30">Every 30 days</option>
+        <option value="60">Every 60 days</option>
+        <option value="120">Every 120 days</option>
+      </select>
+      <label for="start-date">Starting on date:</label>
+        <input type="date" name="start-date">
+      <input type="submit">
+  </form>
+<br>
+  <form action="/set-email-preferences" method="POST">
+    <label for="email-frequency">Select email frequency</label>
+        <br>    
+      <select name="email-frequency" id="email-frequency">
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+      </select>
+      <input type="submit">
+  </form>
 
 {% endblock %}

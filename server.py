@@ -5,6 +5,7 @@ from model import connect_to_db
 import crud
 import os
 from flask_debugtoolbar import DebugToolbarExtension
+import datetime
 
 from jinja2 import StrictUndefined
 
@@ -283,14 +284,22 @@ def send_scheduled_email(current_user):
 
     print('Email sent.')
 
-@app.route('/schedule-report')
+#FIXME: GET should lead to homepage/user inventory
+@app.route('/schedule-report', methods=['POST'])
 def schedule_report():
     """Schedules an automated email report for expiring items."""
     scheduler.print_jobs()
     print(session['current_user'])
     current_user = session['current_user']
-    job = scheduler.add_job(send_scheduled_email, 'interval', minutes=1, max_instances=1, id='my_job_id', replace_existing=True, kwargs= {'current_user': current_user})
+    email_frequency = int(request.form.get('email-frequency'))
+
+    email_interval = datetime.timedelta(days = int(email_frequency))
+    print(f'EMAIL FREQUENCY: {email_frequency}')
+
+    job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, max_instances=1, id='my_job_id', replace_existing=True, kwargs= {'current_user': current_user})
     scheduler.start()
+
+    scheduler.print_jobs()
 
     return "Expiration report email scheduled!"
 
