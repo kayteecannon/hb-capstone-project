@@ -38,6 +38,9 @@ def homepage():
         scheduler.start()
     scheduler.print_jobs()
 
+    if session.get('logged_in'):
+        return redirect(f'/user/{session["current_user"]}/inventory')
+
     return render_template('homepage.html')
     
 @app.route('/register', methods=['GET','POST'])
