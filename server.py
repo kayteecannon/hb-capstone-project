@@ -107,8 +107,10 @@ def user_inventory(user_id):
     if session.get('logged_in') == True and int(user_id) == session.get('current_user'):
         user = crud.get_user_by_id(user_id)
         inventory = crud.get_first_inventory_for_user(user)
+        items = inventory.items
+        items.sort(key=lambda item: item.name)
 
-        return render_template('user-inventory.html', user=user, inventory=inventory)
+        return render_template('user-inventory.html', user=user, items=items)
 
     else:
         return redirect('/')

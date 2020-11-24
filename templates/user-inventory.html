@@ -13,7 +13,7 @@
             <th>Date Added</th>
         </tr>
       </thead>
-      {% for item in inventory.items %}
+      {% for item in items %}
       <tr id="item-{{item.item_id}}-row">
         <td>{{ item.name }}</td>
         <td>{{ item.quantity }}</td>
