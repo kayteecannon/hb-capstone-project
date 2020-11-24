@@ -15,7 +15,6 @@ class User(db.Model):
     last_updated_on = db.Column(db.DateTime, nullable=False)
     
     inventories = db.relationship('Inventory', cascade='all, delete-orphan')
-    jobs = db.relationship('Job', cascade='all, delete-orphan')
 
     def __repr__(self):
         return f'<User user_id: {self.user_id}, email: {self.email}>'
@@ -56,17 +55,6 @@ class Item(db.Model):
 
     def __repr__(self):
         return f'<Item item_id: {self.item_id}, name: {self.name}>'
-
-class Job(db.Model):
-    """An APScheduler job"""
-
-    __tablename__ = 'jobs'
-
-    job_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    apscheduler_id = db.Column(db.String)
-
-    user = db.relationship('User')
 
 def connect_to_db(app, db_name):
     """Connect to database."""
