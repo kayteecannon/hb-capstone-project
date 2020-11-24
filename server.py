@@ -11,8 +11,15 @@ from jinja2 import StrictUndefined
 
 import mail_helper
 from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 
-scheduler = BackgroundScheduler()
+jobstores = {
+    'default': SQLAlchemyJobStore(url='postgresql:///hbcapstone')
+}
+
+scheduler = BackgroundScheduler(jobstores=jobstores)
+
+
 # scheduler.print_jobs()
 # job = scheduler.add_job(scheduled_email, 'interval', minutes=1, max_instances=1, id='my_job_id', replace_existing=True)
 # scheduler.start()
@@ -27,6 +34,8 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def homepage():
     """View homepage."""
+    scheduler.start()
+    scheduler.print_jobs()
 
     return render_template('homepage.html')
     
@@ -289,15 +298,18 @@ def send_scheduled_email(current_user):
 def schedule_report():
     """Schedules an automated email report for expiring items."""
     scheduler.print_jobs()
-    print(session['current_user'])
     current_user = session['current_user']
     email_frequency = int(request.form.get('email-frequency'))
 
-    email_interval = datetime.timedelta(days = int(email_frequency))
     print(f'EMAIL FREQUENCY: {email_frequency}')
-
-    job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, max_instances=1, id='my_job_id', replace_existing=True, kwargs= {'current_user': current_user})
-    scheduler.start()
+    if scheduler.running == True:
+        scheduler.pause()
+        job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, max_instances=1, id='my_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
+        scheduler.resume()
+    
+    else:
+        job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, max_instances=1, id='my_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
+        scheduler.start()
 
     scheduler.print_jobs()
 
