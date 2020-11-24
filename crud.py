@@ -144,6 +144,15 @@ def get_items_expiring(inventory, amount_of_days):
 # Update functions
 #
 
+def update_user_password(user, new_password):
+    """Update user password."""
+
+    user.password = new_password
+    user.last_updated_on = datetime.datetime.now()
+
+    db.session.commit()
+    print(f'User {user.user_id} password updated.')
+
 def update_item_quantity(item, quantity):
     """Update quantity of given item."""
 
