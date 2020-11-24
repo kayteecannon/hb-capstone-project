@@ -2,10 +2,30 @@
 {% block title %}Capstone Homepage{% endblock %}
 
 {% block body %}
-  <h1>Inventory Homepage</h1>
 
-  <a href="/register">Create an Account</a>
-  </br>
-  <a href="/login">Log In</a>
+<body class="text-center">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<main role="main">
+  <h1 class="cover-heading">Inventory Homepage</h1>
+  <p class="lead">Build an inventory that informs you when items are expiring!</p>
+    <div class="row">
+      <div class="col-12">
+        <a href="/register" class="btn btn-lg btn-primary">Create an Account</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <a href="/login" class="btn btn-lg btn-primary">Log In</a>
+      </div>
+    </div>  
+</main>
+
+<footer>
+  <div>
+    <p>Website by <a href="https://linkedin.com/in/kaytee-cannon">Kaytee Cannon</a>.</p>
+  </div>
+</footer>
+</div>
+</body>
 
 {% endblock %}
