@@ -34,7 +34,8 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def homepage():
     """View homepage."""
-    scheduler.start()
+    if scheduler.running == False:
+        scheduler.start()
     scheduler.print_jobs()
 
     return render_template('homepage.html')
@@ -314,6 +315,26 @@ def schedule_report():
     scheduler.print_jobs()
 
     return "Expiration report email scheduled!"
+
+@app.route('/set-new-password', methods=['POST'])
+def update_password():
+    """Changes user password"""
+
+    user = crud.get_user_by_id(session['current_user'])
+    old_password = request.form.get('old-password')
+    new_password = request.form.get('new-password')
+    confirm_password = request.form.get('confirm-password')
+
+    if old_password == user.password:
+        if new_password == confirm_password:
+            crud.update_user_password(user=user,new_password=new_password)
+            flash('Password updated!')
+        else:
+            flash('New passwords do not match. Please try again.')
+    else:
+        flash('Incorrect password.  Please try again.')
+
+    return redirect('/user/1/settings')
 
 if __name__ == '__main__':
     app.debug = False
