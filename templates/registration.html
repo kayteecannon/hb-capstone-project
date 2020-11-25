@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}Registration{% endblock %}
-
+{% block styles %}
+  <link href="/static/css/registration.css" rel="stylesheet">
+{% endblock %}
 {% block body %}
-  <h1>Create an account</h1>
-
-  <form action="/register" method="POST">
-    <label for="email">Email</label>
-    <input type="email" name="email" required>
-    <br>
-    <label for="password">Password</label>
-    <input type="password" name="password" required>
-    <br>
-    <label for="confirm-password">Confirm Password</label>
-    <input type="password" name="confirm-password" required>
-    <br>
-    <input type="submit">
+<body class="text-center">
+  <form class="form-signin" action='/register' method="POST">
+    <!--<img class="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+    <h1 class="h3 mb-3 font-weight-normal">Create a new account</h1>
+    <label for="input-email" class="sr-only">Email address</label>
+    <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required autofocus>
+    <label for="input-password" class="sr-only">Password</label>
+    <input type="password" id="input-password" class="form-control" name="password" placeholder="Password" required>
+    <label for="input-password" class="sr-only">Confirm Password</label>
+    <input type="password" id="confirm-password" class="form-control" name="confirm-password" placeholder="Confirm password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
   </form>
+</body>
 
 {% endblock %}
