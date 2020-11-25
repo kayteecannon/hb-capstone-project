@@ -312,14 +312,16 @@ def schedule_report():
         scheduler.pause()
         job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, start_date=start_date, max_instances=1, id=f'{current_user}_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
         scheduler.resume()
+        flash("Expiration report email scheduled!")
     
     else:
         job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, start_date=start_date, max_instances=1, id=f'{current_user}_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
         scheduler.start()
+        flash("Expiration report email scheduled!")
 
     scheduler.print_jobs()
 
-    return "Expiration report email scheduled!"
+    return redirect(f'/user/{current_user}/settings')
 
 @app.route('/set-new-password', methods=['POST'])
 def update_password():
@@ -339,7 +341,7 @@ def update_password():
     else:
         flash('Incorrect password.  Please try again.')
 
-    return redirect('/user/1/settings')
+    return redirect(f'/user/{user.user_id}/settings')
 
 if __name__ == '__main__':
     app.debug = False
