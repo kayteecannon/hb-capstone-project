@@ -306,15 +306,15 @@ def schedule_report():
     scheduler.print_jobs()
     current_user = session['current_user']
     email_frequency = int(request.form.get('email-frequency'))
-
-    print(f'EMAIL FREQUENCY: {email_frequency}')
+    start_date = request.form.get('start-date')
+    
     if scheduler.running == True:
         scheduler.pause()
-        job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, max_instances=1, id='my_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
+        job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, start_date=start_date, max_instances=1, id=f'{current_user}_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
         scheduler.resume()
     
     else:
-        job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, max_instances=1, id='my_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
+        job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, start_date=start_date, max_instances=1, id=f'{current_user}_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
         scheduler.start()
 
     scheduler.print_jobs()
