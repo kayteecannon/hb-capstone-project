@@ -127,6 +127,7 @@ def expiration_report(user_id):
         inventory = crud.get_first_inventory_for_user(user)
 
         expiring_items = crud.get_items_expiring(inventory, 30)
+        expiring_items.sort(key=lambda item: item.expiration_date)
 
         return render_template('expiration-report.html', 
                                 user=user, 
