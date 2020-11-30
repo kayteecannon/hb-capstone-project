@@ -2,6 +2,21 @@
 {% block title %}Settings{% endblock %}
 
 {% block body %}
+      {% for msg in get_flashed_messages(category_filter='info') %}
+      <section class="alert alert-success" role="alert">
+        <p>
+        {{ msg }}
+      </p>
+      </section>
+      {% endfor %}
+      {% for msg in get_flashed_messages(category_filter='error') %}
+      <section class="alert alert-danger" role="alert">
+        <p>
+        {{ msg }}
+      </p>
+      </section>
+      {% endfor %}
+
   <h1>Settings</h1>
   <form action="/set-new-password" method="POST">
     <label for="email">Email</label>
