@@ -56,14 +56,14 @@ def registration():
         user = crud.get_user_by_email(email)
 
         if user:
-            flash(f'Cannot create account with email: {email}.')
+            flash(f'Cannot create account with email: {email}.', 'error')
         elif password == confirm_password:
             new_user = crud.create_user(email, password)
             crud.create_inventory(new_user.user_id, title='default')
-            flash('Account created successfully.  Please log in.')
+            flash('Account created successfully.  Please log in.', 'info')
             return redirect('/login')
         else:
-            flash(f'Passwords do not match. Please try again.')
+            flash(f'Passwords do not match. Please try again.', 'error')
             return redirect('/register')
 
     return render_template('registration.html')
@@ -86,11 +86,11 @@ def login():
     if user and user.password == password:
         session["current_user"] = user.user_id
         session["logged_in"] = True
-        flash(f'Log in successful! Current user:{session["current_user"]} Logged in: {session["logged_in"]}')
+        flash(f'Log in successful! Current user:{session["current_user"]} Logged in: {session["logged_in"]}', 'info')
 
         return redirect(f'/user/{session["current_user"]}/inventory')
     else:
-        flash('Log in unsuccessful. Please try again.')
+        flash('Log in unsuccessful. Please try again.', 'error')
         
     return render_template('login.html')
 
@@ -314,12 +314,12 @@ def schedule_report():
         scheduler.pause()
         job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, start_date=start_date, max_instances=1, id=f'{current_user}_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
         scheduler.resume()
-        flash("Expiration report email scheduled!")
+        flash("Expiration report email scheduled!", 'info')
     
     else:
         job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, start_date=start_date, max_instances=1, id=f'{current_user}_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
         scheduler.start()
-        flash("Expiration report email scheduled!")
+        flash("Expiration report email scheduled!", 'info')
 
     scheduler.print_jobs()
 
@@ -337,11 +337,11 @@ def update_password():
     if old_password == user.password:
         if new_password == confirm_password:
             crud.update_user_password(user=user,new_password=new_password)
-            flash('Password updated!')
+            flash('Password updated!', 'info')
         else:
-            flash('New passwords do not match. Please try again.')
+            flash('New passwords do not match. Please try again.', 'error')
     else:
-        flash('Incorrect password.  Please try again.')
+        flash('Incorrect password.  Please try again.', 'error')
 
     return redirect(f'/user/{user.user_id}/settings')
 
