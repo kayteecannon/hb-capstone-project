@@ -58,7 +58,8 @@ def registration():
         if user:
             flash(f'Cannot create account with email: {email}.')
         elif password == confirm_password:
-            crud.create_user(email, password)
+            new_user = crud.create_user(email, password)
+            crud.create_inventory(new_user.user_id, title='default')
             flash('Account created successfully.  Please log in.')
             return redirect('/login')
         else:
