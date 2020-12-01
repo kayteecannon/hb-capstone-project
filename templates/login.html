@@ -23,6 +23,20 @@
     </ul>
   </div>
 </nav>
+  {% for msg in get_flashed_messages(category_filter='info') %}
+      <section class="alert alert-success" role="alert">
+        <p>
+        {{ msg }}
+        </p>
+      </section>
+      {% endfor %}
+      {% for msg in get_flashed_messages(category_filter='error') %}
+      <section class="alert alert-danger" role="alert">
+        <p>
+        {{ msg }}
+        </p>
+      </section>
+      {% endfor %}
   <form class="form-signin" action='/login' method="POST">
     <!--<img class="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <h1 class="h3 mb-3 font-weight-normal text-center">Inventory Log In</h1>
