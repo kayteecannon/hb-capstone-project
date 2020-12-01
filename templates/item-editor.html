@@ -28,7 +28,7 @@
       <div class="mb-3">
         <form action="/user/1/inventory/{{item.item_id}}/save-item" method="POST">
         <label for="name">Item</label>
-        <input type="text" class="form-control" id="item-name" name="name" value={{item.name}} required>
+        <input type="text" class="form-control" id="item-name" name="name" value="{{item.name}}" required>
         <br>
         <label for="quantity">Quantity</label>
         <input type="text" class="form-control" id="item-quantity" name="quantity" value={{item.quantity}} required>
