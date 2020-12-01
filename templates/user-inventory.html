@@ -29,7 +29,21 @@
     </ul>
   </div>
 </nav>
-<div>
+<div id="inventory-body">
+  {% for msg in get_flashed_messages(category_filter='info') %}
+      <section class="alert alert-success" role="alert">
+        <p>
+        {{ msg }}
+      </p>
+      </section>
+      {% endfor %}
+      {% for msg in get_flashed_messages(category_filter='error') %}
+      <section class="alert alert-danger" role="alert">
+        <p>
+        {{ msg }}
+      </p>
+      </section>
+      {% endfor %}
   <h1 class="text-center">User {{ user.user_id }}'s Inventory</h1>
   <section class="col-10 mx-auto d-lg-block d-md-block d-none">
     <table class="table table-hover table-striped">
