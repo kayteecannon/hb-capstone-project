@@ -17,35 +17,52 @@
       </section>
       {% endfor %}
 
-  <h1>Settings</h1>
-  <form action="/set-new-password" method="POST">
-    <label for="email">Email</label>
-    <input type="email" name="email" value={{user.email}} disabled>
-    <br>
-    <p>Change password</p>
-    <label for="old-password">Current password</label>
-    <input type="password" name="old-password" required>
-    <br>
-    <label for="new-password">New password</label>
-    <input type="password" name="new-password" required>
-    <br>
-    <label for="confirm-password">Confirm new password</label>
-    <input type="password" name="confirm-password" required>
-    <br>
-    <input type="submit">
-  </form>
-<br>
-  <form action="/schedule-report" method="POST">
-    <label for="email-frequency">Select email frequency</label>
-        <br>    
-      <select name="email-frequency" id="email-frequency">
-        <option value="30">Every 30 days</option>
-        <option value="60">Every 60 days</option>
-        <option value="120">Every 120 days</option>
-      </select>
-      <label for="start-date">Starting on date:</label>
-        <input type="date" name="start-date">
-      <input type="submit">
-  </form>
 
+      <body class="bg-light">
+        <div class="container">
+      <div class="py-5 text-center">
+        <!--<img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+        <h2>User Settings</h2>
+      </div>
+        <div class="col-md-8 order-md-1 mx-auto">
+          <div class="mb-3">
+            <form action="/set-new-password" method="POST">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" value={{user.email}} disabled>
+          </div>
+          <h4 class="mb-3">Change password</h4>
+          <div class="mb-3">
+            <label for="old-password">Current password</label>
+            <input type="password" class="form-control" name="old-password" required>
+          </div>
+          <div class="mb-3">
+            <label for="new-password">New password</label>
+            <input type="password" class="form-control" name="new-password" required>
+          </div>
+          <div class="mb-3">
+            <label for="confirm-password">Confirm password</label>
+            <input type="password" class="form-control" name="confirm-password" required>
+          </div>
+          <input type="submit">
+        </form>
+        <div>
+          <br>
+        <h4 class="mb-3">Schedule expiration report email</h4>
+        <form action="/schedule-report" method="POST">
+            <div class="mb-3">
+              <label for="email-frequency">Select email frequency</label>
+              <select class="custom-select d-block w-100" name="email-frequency" required>
+                <option value="30">Every 30 days</option>
+                <option value="60">Every 60 days</option>
+                <option value="120">Every 120 days</option>
+              </select>
+            </div> 
+            <div class="mb-3">
+              <label for="start-date">Starting on date:</label>
+              <input type="date" name="start-date" required>
+            </div>
+            <input type="submit">
+        </form>
+      </div>
+      
 {% endblock %}
