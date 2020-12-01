@@ -10,11 +10,16 @@
     {% block styles %}{% endblock %}
   </head>
   <body>
-    {% for msg in get_flashed_messages() %}
+     <!--{% for msg in get_flashed_messages() %}
+     <section class="alert alert-success" role="alert">
+        <p>
+        {{ msg }}
+      </p>
+      </section>
       <p class="flash-msg">
         {{ msg }}
       </p>
-    {% endfor %}
+    {% endfor %}-->
     {% block body %}
     {% endblock %}
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
