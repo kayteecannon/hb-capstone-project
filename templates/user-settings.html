@@ -1,7 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}Settings{% endblock %}
-
+{% block styles %}
+  <link href="/static/css/user-settings.css" rel="stylesheet">
+{% endblock %}
 {% block body %}
+<nav id="navigation-bar" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="/">Inventory</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/user/{{user.user_id}}/inventory">Inventory<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user/{{user.user_id}}/expiration-report">Expiration Report</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user/{{user.user_id}}/settings">Settings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div id="settings-body">
       {% for msg in get_flashed_messages(category_filter='info') %}
       <section class="alert alert-success" role="alert">
         <p>
@@ -66,5 +94,6 @@
         </form>
         <br>
       </div>
-      
+    </div>
+  </div>
 {% endblock %}
