@@ -1,4 +1,23 @@
+body {
+  min-height: 100%;
+    background-image: url(/static/assets/cork-board.png);
+    background-repeat: repeat;
+}
 #inventory-body {
     margin-top: 5rem;
   }
+#inventory-table {
+  background-color: antiquewhite;
+  padding: 2rem;
+}
 
+table.table-bordered{
+  border:1px solid black;
+  margin-top:20px;
+}
+table.table-bordered > thead > tr > th{
+  border:1px solid black;
+}
+table.table-bordered > tbody > tr > td{
+  border:1px solid black;
+}
