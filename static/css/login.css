@@ -11,6 +11,11 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #f5f5f5;
+  min-height: 100%;
+  background-image: url(/static/assets/retina_wood.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .form-signin {
