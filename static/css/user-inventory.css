@@ -9,6 +9,7 @@ body {
 #inventory-table {
   background-color: antiquewhite;
   padding: 2rem;
+  margin-top: 7rem;
 }
 
 table.table-bordered{
