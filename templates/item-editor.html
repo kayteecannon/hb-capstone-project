@@ -33,13 +33,12 @@
         <label for="quantity">Quantity</label>
         <input type="text" class="form-control" id="item-quantity" name="quantity" value={{item.quantity}} required>
         <br>
-        <label for="quantity">Expiration Date</label>
-        <input type="text" class="form-control" id="item-expiration" name="expiration-date" value={{item.expiration_date}} required>
+        <label for="expiration-date">Expiration Date</label>
+        <input type="date" class="form-control" id="item-expiration" name="expiration-date" value={{item.expiration_date}} required>
         <br>
-        <div class="row">
-        <input class="col-md-3" id="delete-item" type="button" value="Delete">
-        <input class="col-md-3 offset-md-6" type="submit" value="Save">
-        </div>
+        <!--<a class="btn btn-lg btn-secondary float-left" id="cancel-button" type="button" href="/">Cancel</a>-->
+        <input class="btn btn-lg btn-secondary float-left" id="delete-item" type="button" value="Delete">
+        <input class="btn btn-lg btn-secondary float-right" type="submit"  value="Save">
         </form>  
       </div>
 
