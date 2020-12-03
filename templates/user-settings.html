@@ -12,9 +12,6 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="/user/{{user.user_id}}/inventory">Inventory</a>
       </li>
       <li class="nav-item">
@@ -23,8 +20,10 @@
       <li class="nav-item active">
         <a class="nav-link" href="/user/{{user.user_id}}/settings">Settings<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/logout">Log Out</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logged in</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="/logout">Sign out</a>
       </li>
     </ul>
   </div>
@@ -53,12 +52,37 @@
         <h2>User Settings</h2>
       </div>
         <div class="col-md-8 order-md-1 mx-auto">
+          <div>
+          <h4 class="mb-3">Schedule expiration report email</h4>
+          <form action="/schedule-report" method="POST">
+              <div class="mb-3">
+                <label for="email-frequency">Select email frequency</label>
+                <select class="custom-select d-block w-100" name="email-frequency" required>
+                  <option value="7">Weekly</option>
+                  <option value="14">Every 2 weeks</option>
+                  <option value="30">Every 30 days</option>
+                  <option value="60">Every 60 days</option>
+                </select>
+              </div> 
+              <div class="mb-3">
+                <label for="start-date">Starting on date:</label>
+                <input type="date" name="start-date" required>
+              </div>
+              <br>
+              <div class="d-flex justify-content-center">
+              <input type="submit" class="btn btn-lg btn-secondary float-right" value="Schedule email">
+            </div>
+          </form>
+          <br>
+        </div>
+        <br>
+          <div>
+          <form action="/set-new-password" method="POST">
+          <h4 class="mb-3">Change password</h4>
           <div class="mb-3">
-            <form action="/set-new-password" method="POST">
-            <label for="email">Email</label>
+          <label for="email">Email</label>
             <input type="email" class="form-control" id="email" value={{user.email}} disabled>
           </div>
-          <h4 class="mb-3">Change password</h4>
           <div class="mb-3">
             <label for="old-password">Current password</label>
             <input type="password" class="form-control" name="old-password" required>
@@ -71,28 +95,11 @@
             <label for="confirm-password">Confirm password</label>
             <input type="password" class="form-control" name="confirm-password" required>
           </div>
-          <input type="submit">
-        </form>
-        <div>
           <br>
-        <h4 class="mb-3">Schedule expiration report email</h4>
-        <form action="/schedule-report" method="POST">
-            <div class="mb-3">
-              <label for="email-frequency">Select email frequency</label>
-              <select class="custom-select d-block w-100" name="email-frequency" required>
-                <option value="30">Every 30 days</option>
-                <option value="60">Every 60 days</option>
-                <option value="90">Every 90 days</option>
-                <option value="120">Every 120 days</option>
-              </select>
-            </div> 
-            <div class="mb-3">
-              <label for="start-date">Starting on date:</label>
-              <input type="date" name="start-date" required>
-            </div>
-            <input type="submit">
+          <div class="d-flex justify-content-center">
+          <input type="submit" class="btn btn-lg btn-secondary float-right" value="Change password">
+        </div>
         </form>
-        <br>
       </div>
     </div>
   </div>
