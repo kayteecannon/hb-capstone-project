@@ -86,8 +86,7 @@ def login():
     if user and user.password == password:
         session["current_user"] = user.user_id
         session["logged_in"] = True
-        flash(f'Log in successful! Current user:{session["current_user"]} Logged in: {session["logged_in"]}', 'info')
-
+        
         return redirect(f'/user/{session["current_user"]}/inventory')
     else:
         flash('Log in unsuccessful. Please try again.', 'error')
@@ -137,15 +136,15 @@ def expiration_report(user_id):
     else:
         return redirect('/')
 
-@app.route('/user/<user_id>/inventory/item-editor')
-def item_editor(user_id):
-    """View item editor."""
+# @app.route('/user/<user_id>/inventory/item-editor')
+# def item_editor(user_id):
+#     """View item editor."""
 
-    if session.get('logged_in') == True and int(user_id) == session.get('current_user'):
-        return render_template('item-editor.html')
+#     if session.get('logged_in') == True and int(user_id) == session.get('current_user'):
+#         return render_template('item-editor.html')
     
-    else:
-        return redirect('/')
+#     else:
+#         return redirect('/')
 
 
 @app.route('/user/<user_id>/inventory/add-item', methods=['GET','POST'])
@@ -233,7 +232,7 @@ def delete_item():
 
     print(request)
     content = request.get_json()
-    print(content)
+    print(f'THIS IS THE CONTENT: {content}')
     name = content['name']
     quantity = content['quantity']
     expiration = content['expiration']
