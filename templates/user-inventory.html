@@ -11,9 +11,6 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
-      </li>
       <li class="nav-item active">
         <a class="nav-link" href="/user/{{user.user_id}}/inventory">Inventory<span class="sr-only">(current)</span></a>
       </li>
@@ -23,8 +20,10 @@
       <li class="nav-item">
         <a class="nav-link" href="/user/{{user.user_id}}/settings">Settings</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/logout">Log Out</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logged in</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="/logout">Sign out</a>
       </li>
     </ul>
   </div>
@@ -44,8 +43,10 @@
       </p>
       </section>
       {% endfor %}
-  <h1 class="text-center">User {{ user.user_id }}'s Inventory</h1>
+  
   <section id="inventory-table" class="col-10 mx-auto d-lg-block d-md-block d-none">
+        <a href="/user/{{user.user_id}}/inventory/add-item" class="btn btn-lg btn-secondary float-right">Add Item</a>
+        <h1 class="text-center">All Items</h1>    
     <table class="table table-hover table-striped table-bordered">
       <thead>
         <tr>
@@ -65,13 +66,6 @@
       {% endfor %}
     </table>
   </section>
-
-  <a href="/user/{{user.user_id}}/inventory/add-item">Add Item</a>
-  <a href="/user/{{user.user_id}}/inventory/item-editor/1">Edit Item</a>
-  <a href="/user/{{user.user_id}}/expiration-report">Expiration Report</a>
-  <a href="/user/{{user.user_id}}/settings">Settings</a>
-  <a href="/logout">Log Out</a>
-</div>
   <script src="http://code.jquery.com/jquery.js"></script>
   <script src="/static/js/ItemController.js"></script>
 {% endblock %}
