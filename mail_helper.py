@@ -5,6 +5,7 @@ import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 import crud
+import datetime
 
 style_string = """<head>
 <style>
@@ -26,6 +27,9 @@ tr:nth-child(even) {
 </style>
 </head>"""
 
+date_sent = datetime.datetime.now()
+formatted_date = date_sent.strftime('%d %b %Y')
+
 def send_email(htmlString):
   message = Mail(
       from_email='kaytee.cannon@mac.com',
@@ -35,14 +39,14 @@ def send_email(htmlString):
                     <html>
                     {style_string}
                     <body>
-
-                    <h2>Expiring Items</h2>
+                    <h1 style="font-family: 'Francois One', sans-serif; text-align: center">Fill Me Inventory Report - {formatted_date}</h1>
+                    <h2 style="font-family: 'Roboto', sans-serif; text-align: center">Items Expiring in the Next 30 Days</h2>
 
                     <table style="font-family: arial, sans-serif;
                         border-collapse: collapse;
                         width: 100%;">
                     <thead>
-                    <tr>
+                    <tr style="font-family: 'Roboto', sans-serif;">
                         <th>Item</th>
                         <th>Quantity</th>
                         <th>Expiration Date</th>
