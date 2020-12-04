@@ -22,3 +22,14 @@ table.table-bordered > thead > tr > th{
 table.table-bordered > tbody > tr > td{
   border:1px solid black;
 }
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #fff;
+  /*text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #418517;
+  border: .05rem solid #fff;
+  margin: 5px;
+}
