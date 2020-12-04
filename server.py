@@ -168,7 +168,7 @@ def add_item(user_id):
 
             return redirect(f'/user/{user_id}/inventory')
         
-        return render_template('add-item.html')
+        return render_template('add-item.html', user_id=user_id)
     
     else:
         return redirect('/')
@@ -197,7 +197,7 @@ def edit_item(user_id, item_id):
         item = crud.get_item_by_id(item_id)
 
         if item:
-            return render_template('item-editor.html', item=item)
+            return render_template('item-editor.html', item=item, user_id=user_id)
         else: 
             return redirect(f'/user/{user_id}/inventory')
 
