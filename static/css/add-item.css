@@ -3,3 +3,14 @@ body {
     background-image: url(/static/assets/ep_naturalwhite.png);
     background-repeat: repeat;
   }
+
+  /* Custom default button */
+.save-button,
+.save-button:hover,
+.save-button:focus {
+  color: #fff;
+  /*text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #418517;
+  border: .05rem solid #fff;
+  margin: 5px;
+}
