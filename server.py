@@ -275,8 +275,21 @@ def send_email():
 def settings(user_id):
     """View user settings page"""
 
+    jobs = scheduler.get_jobs()
     user = crud.get_user_by_id(user_id)
-    return render_template('user-settings.html', user=user)
+
+    for job in jobs:
+        print(dir(job))
+
+    for job in jobs:
+        if job.kwargs['current_user'] == session['current_user']:
+            email_frequency = job.trigger.interval.days
+            next_run_time = job.next_run_time
+            next_run = next_run_time.strftime('%b %d %Y')
+            return render_template('user-settings.html', user=user, email_frequency=email_frequency, next_run_time=next_run)
+
+    
+    return render_template('user-settings.html', user=user, email_frequency=None, next_run_time=None)
 
 def send_scheduled_email(current_user):
     
@@ -329,12 +342,10 @@ def schedule_report():
         scheduler.pause()
         job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, start_date=start_date, max_instances=1, id=f'{current_user}_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
         scheduler.resume()
-        flash("Expiration report email scheduled!", 'info')
     
     else:
         job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, start_date=start_date, max_instances=1, id=f'{current_user}_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
         scheduler.start()
-        flash("Expiration report email scheduled!", 'info')
 
     scheduler.print_jobs()
 

@@ -55,7 +55,16 @@
       </div>
         <div class="col-md-8 order-md-1 mx-auto">
           <div>
-          <h4 class="mb-3">Schedule expiration report email</h4>
+          <h2 class="mb-3">Expiration Report Email Settings</h4>
+          {% if email_frequency != None %}
+          <p>Expiration report currently set to send every <strong>{{email_frequency}} days</strong>.  Next report will be sent on <strong>{{ next_run_time }}</strong>.</p>
+          {% endif %}
+          <br>
+          {% if email_frequency == None %}
+          <h3 class="mb-3">Schedule expiration report email</h3>
+          {% else %}
+          <h3 class="mb-3">Change expiration report email settings</h3>
+          {% endif %}
           <form action="/schedule-report" method="POST">
               <div class="mb-3">
                 <label for="email-frequency">Select email frequency</label>
@@ -80,7 +89,7 @@
         <br>
           <div>
           <form action="/set-new-password" method="POST">
-          <h4 class="mb-3">Change password</h4>
+          <h3 class="mb-3">Change password</h4>
           <div class="mb-3">
           <label for="email">Email</label>
             <input type="email" class="form-control" id="email" value={{user.email}} disabled>

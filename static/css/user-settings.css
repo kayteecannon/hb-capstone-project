@@ -16,8 +16,19 @@ a.navbar-brand {
 }
 
 h1 {
-    font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
   }
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+h3 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.5rem;
+}
 
 #settings-body {
     margin-top: 3rem;
