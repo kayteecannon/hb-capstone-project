@@ -1,3 +1,9 @@
+body {
+    min-height: 100%;
+    background-image: url(/static/assets/brushed_alu_@2X.png);
+    background-repeat: repeat;
+  }
+
 #settings-body {
     margin-top: 3rem;
     padding-bottom: 5rem;
