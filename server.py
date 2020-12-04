@@ -112,7 +112,10 @@ def user_inventory(user_id):
         items = inventory.items
         items.sort(key=lambda item: item.name)
 
-        return render_template('user-inventory.html', user=user, items=items)
+        current_date = datetime.datetime.now().date()
+        expiry_delta_30 = current_date + datetime.timedelta(30)
+
+        return render_template('user-inventory.html', user=user, items=items, expiry_delta_30=expiry_delta_30)
 
     else:
         return redirect('/')
@@ -257,8 +260,8 @@ def send_email():
         html_list.append(f'''<tr>
                                 <td>{item.name}</td>
                                 <td>{item.quantity}</td>
-                                <td>{item.expiration_date}</td>
-                                <td>{item.date_added.strftime('%Y-%m-%d')}</td>
+                                <td>{item.expiration_date.strftime('%d %b %Y')}</td>
+                                <td>{item.date_added.strftime('%d %b %Y')}</td>
                             </tr>''')
     
     separator = ''
@@ -293,7 +296,7 @@ def send_scheduled_email(current_user):
                                 <td>{item.name}</td>
                                 <td>{item.quantity}</td>
                                 <td>{item.expiration_date}</td>
-                                <td>{item.date_added.strftime('%Y-%m-%d')}</td>
+                                <td>{item.date_added.strftime('%d %b %Y')}</td>
                             </tr>''')
             row_number += 1
 
@@ -302,7 +305,7 @@ def send_scheduled_email(current_user):
                                 <td>{item.name}</td>
                                 <td>{item.quantity}</td>
                                 <td>{item.expiration_date}</td>
-                                <td>{item.date_added.strftime('%Y-%m-%d')}</td>
+                                <td>{item.date_added.strftime('%d %b %Y')}</td>
                             </tr>''')
             row_number += 1
     
