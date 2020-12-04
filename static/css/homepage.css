@@ -18,7 +18,9 @@ a:hover {
   background-color: #418517;
   border: .05rem solid #fff;
   margin: 5px;
+  font-family: 'Roboto', sans-serif;
 }
+
 
 
 /*
@@ -67,6 +69,7 @@ body {
   color: rgba(255, 255, 255, 1);
   background-color: transparent;
   border-bottom: .25rem solid transparent;
+  font-family: 'Roboto', sans-serif;
 }
 
 .nav-masthead .nav-link:hover,
@@ -102,6 +105,20 @@ body {
 .cover .btn-lg {
   padding: .75rem 1.25rem;
   font-weight: 700;
+}
+
+h1 {
+  font-family: 'Francois One', sans-serif;
+  font-size: 4rem;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 4rem;
+}
+
+p.footer-text {
+  font-size: 1rem;
 }
 
 

@@ -16,6 +16,22 @@ body {
   background-repeat: repeat;
 }
 
+.navbar {
+  background-color:  #27520d;
+}
+
+a.navbar-brand {
+  font-family: 'Francois One', sans-serif;
+}
+
+.nav-link {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-family: 'Francois One', sans-serif;
+}
+
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -57,8 +73,9 @@ body {
 .btn-primary:hover,
 .btn-primary:focus {
   color: #fff;
-  /*text-shadow: none; /* Prevent inheritance from `body` */
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
   background-color: #418517;
   border: .05rem solid #fff;
   margin: 5px;
+  font-family: 'Roboto', sans-serif;
 }

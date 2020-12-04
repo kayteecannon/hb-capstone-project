@@ -3,11 +3,27 @@ body {
     background-image: url(/static/assets/brushed_alu_@2X.png);
     background-repeat: repeat;
   }
+.navbar {
+  background-color:  #27520d;
+}
+
+a.navbar-brand {
+    font-family: 'Francois One', sans-serif;
+}
+
+.nav-link {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+  }
 
 #settings-body {
     margin-top: 3rem;
     padding-bottom: 5rem;
     margin-bottom: 5rem;
+    font-family: 'Open Sans', sans-serif;
   }
 
   /* Custom default button */
@@ -15,8 +31,9 @@ body {
 .btn-secondary:hover,
 .btn-secondary:focus {
   color: #fff;
-  /*text-shadow: none; /* Prevent inheritance from `body` */
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
   background-color: #418517;
   border: .05rem solid #fff;
   margin: 5px;
+  font-family: 'Roboto', sans-serif;
 }

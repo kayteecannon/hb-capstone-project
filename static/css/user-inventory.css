@@ -3,6 +3,22 @@ body {
     background-image: url(/static/assets/cork-board.png);
     background-repeat: repeat;
 }
+.navbar {
+  background-color:  #27520d;
+}
+
+a.navbar-brand {
+  font-family: 'Francois One', sans-serif;
+}
+
+.nav-link {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-family: 'Francois One', sans-serif;
+}
+
 #inventory-body {
     margin-top: 5rem;
   }
@@ -10,6 +26,7 @@ body {
   background-color: antiquewhite;
   padding: 2rem;
   margin-top: 7rem;
+  font-family: 'Open Sans', sans-serif;
 }
 
 table.table-bordered{
@@ -28,8 +45,9 @@ table.table-bordered > tbody > tr > td{
 .btn-secondary:hover,
 .btn-secondary:focus {
   color: #fff;
-  /*text-shadow: none; /* Prevent inheritance from `body` */
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
   background-color: #418517;
   border: .05rem solid #fff;
   margin: 5px;
+  font-family: 'Roboto', sans-serif;
 }

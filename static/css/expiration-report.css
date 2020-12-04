@@ -8,6 +8,23 @@
       background-image: url(/static/assets/cork-board.png);
       background-repeat: repeat;
   }
+
+  .navbar {
+    background-color:  #27520d;
+  }
+
+  a.navbar-brand {
+    font-family: 'Francois One', sans-serif;
+  }
+
+  .nav-link {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  h1 {
+    font-family: 'Francois One', sans-serif;
+  }
+
   #report-body {
       margin-top: 5rem;
     }
@@ -15,6 +32,7 @@
     background-color: pink;
     padding: 2rem;
     margin-top: 7rem;
+    font-family: 'Open Sans', sans-serif;
   }
   
   table.table-bordered{

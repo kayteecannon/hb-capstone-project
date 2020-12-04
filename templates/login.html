@@ -2,10 +2,12 @@
 {% block title %}Log In{% endblock %}
 {% block styles %}
   <link href="/static/css/login.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Open+Sans&family=Roboto:wght@500&display=swap" rel="stylesheet">
 {% endblock %}
 {% block body %}
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="/">Inventory</a>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <a class="navbar-brand" href="/">Fill Me Inventory</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -40,7 +42,7 @@
       {% endfor %}
   <form class="form-signin row" action='/login' method="POST">
     <!--<img class="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-    <h1 class="h3 mb-3 font-weight-normal text-center mx-auto">Inventory Log In</h1>
+    <h1 class="mb-3 font-weight-normal text-center mx-auto">Fill Me Inventory</h1>
     <label for="input-email" class="sr-only">Email address</label>
     <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required autofocus>
     <label for="input-password" class="sr-only">Password</label>

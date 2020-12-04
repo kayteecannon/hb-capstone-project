@@ -2,13 +2,15 @@
 {% block title %}Capstone Homepage{% endblock %}
 {% block styles %}
   <link href="/static/css/homepage.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Open+Sans&family=Roboto:wght@500&display=swap" rel="stylesheet">
 {% endblock %}
 {% block body %}
 <body class="text-center">
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
       <div class="inner">
-        <h3 class="masthead-brand">Inventory</h3>
+        <!--<h3 class="masthead-brand">Fill Me Inventory</h3>-->
         <nav class="nav nav-masthead justify-content-center">
           <a class="nav-link active" href="#">Home</a>
           <a class="nav-link" href="/login">Log In</a>
@@ -35,8 +37,7 @@
 
 <footer class="mastfoot mt-auto">
   <div class="inner">
-    <p>Website by <a href="https://github.com/kayteecannon">Kaytee Cannon</a></p>
-    <p>&copy; 2020</p>
+    <p class="footer-text">Website by <a href="https://github.com/kayteecannon">Kaytee Cannon</a><br>&copy; 2020</p>
   </div>
 </footer>
 </div>
