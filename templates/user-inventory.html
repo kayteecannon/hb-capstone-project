@@ -47,8 +47,14 @@
       {% endfor %}
   
   <section id="inventory-table" class="col-10 mx-auto d-lg-block d-md-block d-none">
-        <a href="/user/{{user.user_id}}/inventory/add-item" class="btn btn-lg btn-secondary float-right">Add Item</a>
-        <h1 class="text-center">All Items</h1>    
+        
+      <div class="d-flex justify-content-center"><h1 class="text-center">All Items</h1></div>
+      <a href="/user/{{user.user_id}}/inventory/add-item" class="btn btn-lg btn-secondary float-right">+</a>  
+      
+    {% if items|length == 0 %}
+    <p>Click + to add an item to your inventory</p>
+    {% else %}     
+
     <table class="table table-hover table-bordered">
       <thead>
         <tr>
@@ -76,6 +82,7 @@
       {% endif %}
       {% endfor %}
     </table>
+    {% endif %}
   </section>
 
   <script src="http://code.jquery.com/jquery.js"></script>

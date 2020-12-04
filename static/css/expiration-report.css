@@ -25,6 +25,14 @@
     font-family: 'Francois One', sans-serif;
   }
 
+  p {
+      text-align: center;
+      margin: 2rem;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.25rem;
+  }
+
+
   #report-body {
       margin-top: 5rem;
     }
