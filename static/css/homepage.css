@@ -13,9 +13,9 @@ a:hover {
 .btn-secondary,
 .btn-secondary:hover,
 .btn-secondary:focus {
-  color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #fff;
+  color: #fff;
+  /*text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #418517;
   border: .05rem solid #fff;
   margin: 5px;
 }
