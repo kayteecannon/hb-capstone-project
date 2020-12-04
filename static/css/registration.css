@@ -51,3 +51,14 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+/* Custom default button */
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus {
+  color: #fff;
+  /*text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #418517;
+  border: .05rem solid #fff;
+  margin: 5px;
+}
