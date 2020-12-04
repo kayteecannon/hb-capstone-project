@@ -37,7 +37,6 @@ def homepage():
     if scheduler.running == False:
         scheduler.start()
     scheduler.print_jobs()
-
     if session.get('logged_in'):
         return redirect(f'/user/{session["current_user"]}/inventory')
 
@@ -86,7 +85,7 @@ def login():
     if user and user.password == password:
         session["current_user"] = user.user_id
         session["logged_in"] = True
-        
+
         return redirect(f'/user/{session["current_user"]}/inventory')
     else:
         flash('Log in unsuccessful. Please try again.', 'error')
@@ -121,7 +120,7 @@ def user_inventory(user_id):
 @app.route('/user/<user_id>/expiration-report')
 def expiration_report(user_id):
     """View user expiration report."""
-
+    send_scheduled_email(user_id)
     if session.get('logged_in') == True and int(user_id) == session.get('current_user'):
         user = crud.get_user_by_id(user_id)
         inventory = crud.get_first_inventory_for_user(user)
@@ -282,16 +281,30 @@ def send_scheduled_email(current_user):
     inventory = crud.get_first_inventory_for_user(user)
 
     expiring_items = crud.get_items_expiring(inventory, 30)
+    expiring_items.sort(key=lambda item: item.expiration_date)
 
     html_list = []
 
+    row_number = 0
+
     for item in expiring_items:
-        html_list.append(f'''<tr>
+        if row_number % 2 == 0:
+            html_list.append(f'''<tr style="background-color: #dddddd;">
                                 <td>{item.name}</td>
                                 <td>{item.quantity}</td>
                                 <td>{item.expiration_date}</td>
                                 <td>{item.date_added.strftime('%Y-%m-%d')}</td>
                             </tr>''')
+            row_number += 1
+
+        else:
+            html_list.append(f'''<tr>
+                                <td>{item.name}</td>
+                                <td>{item.quantity}</td>
+                                <td>{item.expiration_date}</td>
+                                <td>{item.date_added.strftime('%Y-%m-%d')}</td>
+                            </tr>''')
+            row_number += 1
     
     separator = ''
     htmlString = separator.join(html_list)
