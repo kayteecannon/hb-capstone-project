@@ -27,13 +27,16 @@ tr:nth-child(even) {
 </style>
 </head>"""
 
+from_email_test = os.environ['FROM_EMAIL_TEST']
+to_email_test = os.environ['TO_EMAIL_TEST']
+
 date_sent = datetime.datetime.now()
 formatted_date = date_sent.strftime('%B %d, %Y')
 
 def send_email(html_string):
   message = Mail(
-      from_email='kaytee.cannon@mac.com',
-      to_emails='kayteecannon@gmail.com',
+      from_email=from_email_test,
+      to_emails=to_email_test,
       subject='Fill Me Inventory - Expiration Report',
       html_content=f"""<!DOCTYPE html>
                     <html>
@@ -69,8 +72,8 @@ def send_email(html_string):
 
 def send_initial_email(html_string, email_frequency, next_run_date):
   message = Mail(
-      from_email='kaytee.cannon@mac.com',
-      to_emails='kayteecannon@gmail.com',
+      from_email=from_email_test,
+      to_emails=to_email_test,
       subject='Fill Me Inventory - Expiration Report Scheduled',
       html_content=f"""<!DOCTYPE html>
                     <html>
