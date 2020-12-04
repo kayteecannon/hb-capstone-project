@@ -389,7 +389,7 @@ def build_expiration_report(current_user):
             html_list.append(f'''<tr style="background-color: #dddddd;">
                                 <td>{item.name}</td>
                                 <td>{item.quantity}</td>
-                                <td>{item.expiration_date}</td>
+                                <td>{item.expiration_date.strftime('%d %b %Y')}</td>
                                 <td>{item.date_added.strftime('%d %b %Y')}</td>
                             </tr>''')
             row_number += 1
@@ -398,7 +398,7 @@ def build_expiration_report(current_user):
             html_list.append(f'''<tr>
                                 <td>{item.name}</td>
                                 <td>{item.quantity}</td>
-                                <td>{item.expiration_date}</td>
+                                <td>{item.expiration_date.strftime('%d %b %Y')}</td>
                                 <td>{item.date_added.strftime('%d %b %Y')}</td>
                             </tr>''')
             row_number += 1
