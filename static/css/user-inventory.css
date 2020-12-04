@@ -22,6 +22,7 @@ h1 {
 #inventory-body {
     margin-top: 5rem;
   }
+
 #inventory-table {
   background-color: antiquewhite;
   padding: 2rem;
@@ -35,9 +36,15 @@ table.table-bordered{
 }
 table.table-bordered > thead > tr > th{
   border:1px solid black;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25rem;
 }
 table.table-bordered > tbody > tr > td{
   border:1px solid black;
+}
+
+tr.expiring-item {
+  background-color: pink;
 }
 
 /* Custom default button */
