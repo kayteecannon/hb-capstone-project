@@ -120,7 +120,7 @@ def user_inventory(user_id):
 @app.route('/user/<user_id>/expiration-report')
 def expiration_report(user_id):
     """View user expiration report."""
-    send_scheduled_email(user_id)
+    #send_scheduled_email(user_id)
     if session.get('logged_in') == True and int(user_id) == session.get('current_user'):
         user = crud.get_user_by_id(user_id)
         inventory = crud.get_first_inventory_for_user(user)
