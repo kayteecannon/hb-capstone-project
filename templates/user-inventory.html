@@ -49,7 +49,7 @@
   <section id="inventory-table" class="col-10 mx-auto d-lg-block d-md-block d-none">
         <a href="/user/{{user.user_id}}/inventory/add-item" class="btn btn-lg btn-secondary float-right">Add Item</a>
         <h1 class="text-center">All Items</h1>    
-    <table class="table table-hover table-striped table-bordered">
+    <table class="table table-hover table-bordered">
       <thead>
         <tr>
             <th>Item</th>
@@ -59,12 +59,21 @@
         </tr>
       </thead>
       {% for item in items %}
+      {% if item.expiration_date > expiry_delta_30 %}
       <tr id="item-{{item.item_id}}-row">
         <td>{{ item.name }}</td>
         <td>{{ item.quantity }}</td>
-        <td>{{ item.expiration_date.strftime('%Y-%m-%d') }}</td>
-        <td>{{ item.date_added.strftime('%Y-%m-%d') }}</td>
+        <td>{{ item.expiration_date.strftime('%d %b %Y') }}</td>
+        <td>{{ item.date_added.strftime('%d %b %Y') }}</td>
       </tr>
+      {% else %}
+      <tr id="item-{{item.item_id}}-row" class="expiring-item">
+        <td>{{ item.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.expiration_date.strftime('%d %b %Y') }}</td>
+        <td>{{ item.date_added.strftime('%d %b %Y') }}</td>
+      </tr>
+      {% endif %}
       {% endfor %}
     </table>
   </section>
