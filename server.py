@@ -279,13 +279,10 @@ def settings(user_id):
     user = crud.get_user_by_id(user_id)
 
     for job in jobs:
-        print(dir(job))
-
-    for job in jobs:
         if job.kwargs['current_user'] == session['current_user']:
             email_frequency = job.trigger.interval.days
             next_run_time = job.next_run_time
-            next_run = next_run_time.strftime('%b %d %Y')
+            next_run = next_run_time.strftime('%b %d, %Y')
             return render_template('user-settings.html', user=user, email_frequency=email_frequency, next_run_time=next_run)
 
     
@@ -337,15 +334,20 @@ def schedule_report():
     current_user = session['current_user']
     email_frequency = int(request.form.get('email-frequency'))
     start_date = request.form.get('start-date')
+    html_string = build_expiration_report(current_user)
     
     if scheduler.running == True:
         scheduler.pause()
         job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, start_date=start_date, max_instances=1, id=f'{current_user}_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
         scheduler.resume()
+        next_run_date = job.next_run_time.strftime('%A, %B %d, %Y')
+        mail_helper.send_initial_email(html_string, email_frequency, next_run_date)
     
     else:
         job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, start_date=start_date, max_instances=1, id=f'{current_user}_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
         scheduler.start()
+        next_run_date = job.next_run_time.strftime('%A, %B %d, %Y')
+        mail_helper.send_initial_email(html_string, email_frequency, next_run_date)
 
     scheduler.print_jobs()
 
@@ -370,6 +372,40 @@ def update_password():
         flash('Incorrect password.  Please try again.', 'error')
 
     return redirect(f'/user/{user.user_id}/settings')
+
+def build_expiration_report(current_user):
+    user = crud.get_user_by_id(current_user)
+    inventory = crud.get_first_inventory_for_user(user)
+
+    expiring_items = crud.get_items_expiring(inventory, 30)
+    expiring_items.sort(key=lambda item: item.expiration_date)
+
+    html_list = []
+
+    row_number = 0
+
+    for item in expiring_items:
+        if row_number % 2 == 0:
+            html_list.append(f'''<tr style="background-color: #dddddd;">
+                                <td>{item.name}</td>
+                                <td>{item.quantity}</td>
+                                <td>{item.expiration_date}</td>
+                                <td>{item.date_added.strftime('%d %b %Y')}</td>
+                            </tr>''')
+            row_number += 1
+
+        else:
+            html_list.append(f'''<tr>
+                                <td>{item.name}</td>
+                                <td>{item.quantity}</td>
+                                <td>{item.expiration_date}</td>
+                                <td>{item.date_added.strftime('%d %b %Y')}</td>
+                            </tr>''')
+            row_number += 1
+    
+    separator = ''
+    html_string = separator.join(html_list)
+    return html_string
 
 if __name__ == '__main__':
     app.debug = False
