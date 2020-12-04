@@ -25,6 +25,21 @@
     </ul>
   </div>
 </nav>
+<section class="mx-auto">
+{% for msg in get_flashed_messages(category_filter='info') %}
+      <section class="alert alert-success mx-auto" role="alert">
+        <p>
+        {{ msg }}
+        </p>
+      </section>
+      {% endfor %}
+      {% for msg in get_flashed_messages(category_filter='error') %}
+      <section class="alert alert-danger mx-auto" role="alert">
+        <p>
+        {{ msg }}
+        </p>
+      </section>
+      {% endfor %}
   <form class="form-signin" action='/register' method="POST">
     <!--<img class="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <h1 class="mb-3 font-weight-normal text-center">Start a new account</h1>
@@ -37,5 +52,5 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
     <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
   </form>
-
+</section>
 {% endblock %}
