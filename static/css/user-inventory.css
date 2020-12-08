@@ -54,6 +54,10 @@ tr.expiring-item {
   background-color: pink;
 }
 
+td {
+  cursor: pointer;
+}
+
 /* Custom default button */
 .btn-secondary,
 .btn-secondary:hover,
