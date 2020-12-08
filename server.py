@@ -336,7 +336,14 @@ def schedule_report():
     start_date = request.form.get('start-date')
     html_string = build_expiration_report(current_user)
     
-    if scheduler.running == True:
+    if scheduler.running == True and scheduler.get_job(f'{current_user}_job_id'):
+        scheduler.pause()
+        job = scheduler.reschedule_job(job_id=f'{current_user}_job_id', jobstore='default', trigger='interval', days=email_frequency, start_date=start_date)
+        scheduler.resume()
+        next_run_date = job.next_run_time.strftime('%A, %B %d, %Y')
+        mail_helper.send_initial_email(html_string, email_frequency, next_run_date)
+
+    elif scheduler.running == True:
         scheduler.pause()
         job = scheduler.add_job(send_scheduled_email, 'interval', days=email_frequency, start_date=start_date, max_instances=1, id=f'{current_user}_job_id', replace_existing=True, kwargs= {'current_user': current_user}, jobstore='default')
         scheduler.resume()
