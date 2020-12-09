@@ -19,47 +19,47 @@ Fill Me Inventory is a web application that assists users with both emergency pr
 
 ## Installation
 
-1. Clone project:
+1. **Clone project:**
 
 ```
 $ git clone https://github.com/kayteecannon/hb-capstone-project.git
 ```
 
-2. Inside your project directory, create a virtual environment:
+2. **Inside your project directory, create a virtual environment:**
 
 ```
 $ virtualenv env
 ```
 
-3. Activate virtual environment:
+3. **Activate virtual environment:**
 
 ```
 $ source env/bin/activate
 ```
 
-4. Install required libraries using pip:
+4. **Install required libraries using pip:**
 
 ```
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
-5. Create a PostgreSQL database:
+5. **Create a PostgreSQL database:**
 
 ```
 $ createdb hbcapstone
 ```
 
-6. Run model.py file interactively to create database tables:
+6. **Run model.py file interactively to create database tables:**
 
 ```
 $ python3 -i model.py
 >>> db.create_all()
 ```
 
-7. Create a secrets.sh file to hold:
-    * Flask app secret key
-    * Twilio SendGrid Email API key
-    * Environmental variables for testing SendGrid API, to be replaced later
+7. **Create a secrets.sh file to hold:**
+* Flask app secret key
+* Twilio SendGrid Email API key
+* Environmental variables for testing SendGrid API, to be replaced later
 
 ```
 $ touch secrets.sh
@@ -79,7 +79,7 @@ To access secrets.sh variables, inside project directory, run:
 $ source secrets.sh
 ```
 
-8. To run Fill Me Inventory locally, inside project directory run:
+8. **To run Fill Me Inventory locally, inside project directory run:**
 ```
 $ python3 server.py
 ```
