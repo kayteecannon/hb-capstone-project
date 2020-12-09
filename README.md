@@ -11,6 +11,8 @@ Fill Me Inventory is a web application that assists users with both emergency pr
 * JavaScript
 * jQuery
 * AJAX
+* Twilio SendGrid Email API
+* APScheduler
 * HTML
 * CSS
 * Bootstrap
@@ -53,3 +55,33 @@ $ createdb hbcapstone
 $ python3 -i model.py
 >>> db.create_all()
 ```
+
+7. Create a secrets.sh file to hold:
+    * Flask app secret key
+    * Twilio SendGrid Email API key
+    * Environmental variables for testing SendGrid API, to be replaced later
+
+```
+$ touch secrets.sh
+```
+IMPORTANT: DO NOT COMMIT secrets.sh file! Add secrets.sh file to .gitignore 
+
+secrets.sh file will contain:
+```
+export SECRET_KEY='your secret key here'
+export SENDGRID_API_KEY='your api key here'
+export FROM_EMAIL_TEST='your test from email address here'
+export TO_EMAIL_TEST='your test to email address here'
+```
+
+To access secrets.sh variables, inside project directory, run:
+```
+$ source secrets.sh
+```
+
+8. To run Fill Me Inventory locally, inside project directory run:
+```
+$ python3 server.py
+```
+
+Then, open web browser to localhost:5000
