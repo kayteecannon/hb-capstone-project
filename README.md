@@ -84,7 +84,7 @@ $ source secrets.sh
 $ python3 server.py
 ```
 
-Then, open web browser to localhost:5000
+Then, open web browser and go to localhost:5000
 
 
 ## Current Features (Version 1.0)
@@ -102,4 +102,5 @@ Then, open web browser to localhost:5000
 ## Acknowledgments
 
 Homepage image by [Annie Spratt](https://unsplash.com/@anniespratt)
+
 Background textures from [Subtle Patterns by Toptal](https://www.toptal.com/designers/subtlepatterns/)
