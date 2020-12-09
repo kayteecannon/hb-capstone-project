@@ -98,3 +98,8 @@ Then, open web browser to localhost:5000
 * Settings page
     * Schedule email
     * Change password
+
+## Acknowledgments
+
+Homepage image by [Annie Spratt](https://unsplash.com/@anniespratt)
+Background textures from [Subtle Patterns by Toptal](https://www.toptal.com/designers/subtlepatterns/)
