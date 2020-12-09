@@ -85,3 +85,16 @@ $ python3 server.py
 ```
 
 Then, open web browser to localhost:5000
+
+
+## Current Features (Version 1.0)
+
+* User registration
+* User log in
+* Inventory
+* Expiration report
+* Add Item
+* Edit/Delete Item
+* Settings page
+    * Schedule email
+    * Change password
